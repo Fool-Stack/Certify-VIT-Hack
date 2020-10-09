@@ -2,6 +2,8 @@
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/assets/background.jpg");
+	background-size: cover;
 }
 
 .landing-page .MuiGrid-root {
