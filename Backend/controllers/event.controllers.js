@@ -72,7 +72,7 @@ const deleteEvent = async(req, res) => {
 }
 
 const getEventByID = async (req, res) => {
-  const {event_id} = req.body
+  const event_id = req.params.id
   const event = await Event.findById(event_id)
   if(event){
     console.log(event)
