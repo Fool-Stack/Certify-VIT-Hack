@@ -198,12 +198,52 @@ const verifyEmail = async (req, res) => {
     });
 }
 
-// const resendVerifyMail = (req, res) => {
+const resendVerifyMail = async (req, res) => {
+  const { email } = req.body;
+	const user = await Admin.findOne({ email });
+	if (user) {
+    user.verification_key = shortid.generate();
+		user.verification_key_expires = new Date().getTime() + 20 * 60 * 1000;
+		await user
+			.save()
+			.then((result) => {
+        console.log(result)
+				const msg = {
+					to: email,
+					from: process.env.sendgridEmail,
+					subject: "Quzzie: Email Verification",
+					text: " ",
+					html: emailTemplates.VERIFY_EMAIL(result),
+				};
 
-// }
+				sgMail
+					.send(msg)
+					.then((result) => {
+						res.status(200).json({
+							message: "Email verification key sent to email",
+						});
+					})
+					.catch((err) => {
+            console.log(err)
+						res.status(500).json({
+							// message: "something went wrong1",
+							error: err.toString(),
+						});
+					});
+			})
+			.catch((err) => {
+        console.log(err)
+				res.status(400).json({
+					message: "Some error occurred",
+					error: err.toString(),
+				});
+			});
+	}
+}
 
 module.exports = {
   adminRegister,
   adminLogin,
   verifyEmail,
+  resendVerifyMail,
 }
