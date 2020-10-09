@@ -1,0 +1,22 @@
+.landing-page {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.landing-page .MuiGrid-root {
+	flex: 1 !important;
+	padding-left: 2% !important;
+}
+
+.jumbo-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.jumbo-text {
+	font-size: 3.2rem;
+	font-weight: 900;
+}
