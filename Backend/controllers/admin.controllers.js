@@ -1,4 +1,3 @@
-const sendJSONResponse = require('../utils/utility');
 const shortid = require('shortid')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
