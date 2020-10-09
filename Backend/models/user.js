@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Event = require('./event');
-const Admin = require('./admin');
+
 
 
 const userSchema = mongoose.Schema({
