@@ -1,14 +1,23 @@
 const shortid = require('shortid')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+require('dotenv').config()
 const sgMail = require('@sendgrid/mail');
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/admin');
 const User = require('../models/user');
 const Event = require('../models/event');
+const emailTemplates = require('../emails/email');
 
-const adminRegister = (req, res) => {
-	Admin.find({ email: req.body.email })
+sgMail.setApiKey(process.env.SendgridAPIKey);
+
+const adminRegister = async (req, res) => {
+  if(req.body.adminCode !== process.env.AdminSignupCode){
+    return res.status(401).json({
+      message: 'Incorrect admin code'
+    })
+  }
+	await Admin.find({ email: req.body.email })
 		.exec()
 		.then((user) => {
 			if (user.length >= 1) {
@@ -32,32 +41,33 @@ const adminRegister = (req, res) => {
 						user
 							.save()
 							.then(async (result) => {
-								result.verificationKey = shortid.generate();
-								result.verificationKeyExpires =
+								result.verification_key = shortid.generate();
+								result.verification_key_expires =
 									new Date().getTime() + 20 * 60 * 1000;
 								await result
 									.save()
-									.then((result1) => {
-										// const msg = {
-										// 	to: result.email,
-										// 	from: process.env.sendgridEmail,
-										// 	subject: "Certify: Email Verification",
-										// 	text: " ",
-										// 	html: emailTemplates.VERIFY_EMAIL(result1),
-										// };
-										// sgMail
-										// 	.send(msg)
-										// 	.then((result) => {
-										// 		console.log("Email sent");
-										// 	})
-										// 	.catch((err) => {
-                    //     console.log(err)
-                        // res.status(500).json({
-                        //   message: err.toString()
-                        // })
-                    //   });
+									.then(async (result1) => {
+										const msg = {
+											to: result1.email,
+											from: process.env.sendgridEmail,
+											subject: "Certify: Email Verification",
+											text: " ",
+											html: emailTemplates.VERIFY_EMAIL(result1),
+                    };
+                    console.log(msg)
+										await sgMail
+											.send(msg)
+											.then((result12) => {
+												console.log("Email sent");
+											})
+											.catch((err) => {
+                        console.log(err)
+                        return res.status(500).json({
+                          message: err.toString()
+                        })
+                      });
                       console.log(`User created ${result}`)
-                      res.status(201).json({
+                      return res.status(201).json({
                         userDetails: {
                           userId: result._id,
                           email: result.email,
@@ -92,8 +102,8 @@ const adminRegister = (req, res) => {
 }
 
 
-const adminLogin = (req, res) => {
-	Admin.find({ email: req.body.email })
+const adminLogin = async (req, res) => {
+	await Admin.find({ email: req.body.email })
 		.exec()
 		.then((user) => {
       console.log(user)
@@ -102,12 +112,12 @@ const adminLogin = (req, res) => {
 					message: "Auth failed: Email not found probably",
 				});
 			}
-			// if (user[0].is_email_verified === false) {
-      //   console.log("Please Verify your Email")
-			// 	return res.status(409).json({
-			// 		message: "Please verify your email",
-			// 	});
-			// }
+			if (user[0].is_email_verified === false) {
+        console.log("Please Verify your Email")
+				return res.status(409).json({
+					message: "Please verify your email",
+				});
+			}
 			bcrypt.compare(req.body.password, user[0].password, (err, result) => {
 				if (err) {
           console.log(err)
@@ -154,7 +164,86 @@ const adminLogin = (req, res) => {
 		});
 }
 
+const verifyEmail = async (req, res) => {
+  const { verification_key } = req.body;
+	await Admin.findOne({ verification_key })
+		.then(async (user) => {
+			if (Date.now() > user.verification_key_expires) {
+				res.status(401).json({
+					message: "Pass key expired",
+				});
+			}
+			user.verification_key = null;
+			user.verification_key_expires = null;
+			user.is_email_verified = true;
+			await user
+				.save()
+				.then((result1) => {
+					res.status(200).json({
+						message: "User verified",
+					});
+				})
+				.catch((err) => {
+					res.status(400).json({
+						message: "Some error",
+						error: err.toString(),
+					});
+				});
+		})
+		.catch((err) => {
+			res.status(409).json({
+				message: "Invalid verification key",
+				error: err.toString(),
+			});
+    });
+}
+
+const resendVerifyMail = async (req, res) => {
+  const { email } = req.body;
+	const user = await Admin.findOne({ email });
+	if (user) {
+    user.verification_key = shortid.generate();
+		user.verification_key_expires = new Date().getTime() + 20 * 60 * 1000;
+		await user
+			.save()
+			.then((result) => {
+        console.log(result)
+				const msg = {
+					to: email,
+					from: process.env.sendgridEmail,
+					subject: "Quzzie: Email Verification",
+					text: " ",
+					html: emailTemplates.VERIFY_EMAIL(result),
+				};
+
+				sgMail
+					.send(msg)
+					.then((result) => {
+						res.status(200).json({
+							message: "Email verification key sent to email",
+						});
+					})
+					.catch((err) => {
+            console.log(err)
+						res.status(500).json({
+							// message: "something went wrong1",
+							error: err.toString(),
+						});
+					});
+			})
+			.catch((err) => {
+        console.log(err)
+				res.status(400).json({
+					message: "Some error occurred",
+					error: err.toString(),
+				});
+			});
+	}
+}
+
 module.exports = {
   adminRegister,
   adminLogin,
+  verifyEmail,
+  resendVerifyMail,
 }
