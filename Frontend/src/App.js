@@ -5,7 +5,7 @@ import Landing from "./pages/Landing/Landing";
 import ErrorPage from "./pages/ErrorPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import LoginPage from "./pages/Login/LoginPage";
-import SignupPage from "./pages/Signup/SignupPage";
+import SignupPage from "./pages/Login/SignupPage";
 
 function App() {
 	return (
