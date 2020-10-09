@@ -235,9 +235,26 @@ const resendVerifyMail = async (req, res) => {
 	}
 }
 
+const seeAllEvents = async (req, res) => {
+  const _id = req.user.userId
+  const user = await User.findById( _id )
+  if(user){
+    return res.status(200).json({
+      message: 'Events found',
+      events: user.events
+    })
+  }
+  else{
+    return res.status(404).json({
+      message: 'User not found'
+    })
+  }
+}
+
 module.exports = {
   userRegister,
   userLogin,
   verifyEmail,
   resendVerifyMail,
+  seeAllEvents,
 }

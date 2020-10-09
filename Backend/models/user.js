@@ -15,6 +15,7 @@ const userSchema = mongoose.Schema({
   },
   events: [{
     event_id: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
+    is_admin: { type: Boolean, default: Boolean },
     certificate_link: { type: String }
   }],
 	password: { type: String},
