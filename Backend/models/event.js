@@ -3,13 +3,13 @@ const Admin = require('./admin');
 const User = require('./user');
 
 const eventSchema = mongoose.Schema({
-	_id: mongoose.Schema.Types.ObjectId,
+  _id: mongoose.Schema.Types.ObjectId,
   name: { type: String, required: true },
   admins: [{
     admin_id: { type: mongoose.Schema.Types.ObjectId, ref: "Admin" }
   }],
   participants: [{
-    participant_id: { type: mongoose.Schema.Types.ObjectId, ref: "Admin" },
+    participant_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     certificate_link: { type: String }
   }],
   date: { type: Date },
