@@ -4,9 +4,12 @@ const bcrypt = require('bcrypt');
 require('dotenv').config()
 const sgMail = require('@sendgrid/mail');
 const jwt = require('jsonwebtoken');
+const pdf = require('html-pdf');
+const csv = require('csvtojson');
+const fs = require('fs');
 const User = require('../models/user');
 const Event = require('../models/event');
-const emailTemplates = require('../emails/email');
+const htmlTemplates = require('../templates/html-1');
 
 sgMail.setApiKey(process.env.SendgridAPIKey);
 
@@ -96,10 +99,31 @@ const updateEvent = async(req, res) => {
   })
 }
 
+// const convertToPDF = (data) => {
+//   const html = htmlTemplates.TEMPLATE_1(data)
+//   pdf.create(html, {}).toFile('./businesscard.pdf', function(err, res) {
+//   if (err) return console.log(err);
+//   console.log(res); // { filename: '/app/businesscard.pdf' }
+// });
+// }
+
+// convertToPDF({
+//   name:"Jugal",
+//   event: "GG",
+//   grade: "10",
+//   date: "10-10-2002"
+// })
+
+const getCertificates = async (req, res) => {
+  const users = await csv().fromFile(req.file.path);
+  fs.unlinkSync(req.file.path);
+  console.log(users)
+}
 
 module.exports= {
   addEvent,
   deleteEvent,
   getEventByID,
-  updateEvent
+  updateEvent,
+  getCertificates
 }
