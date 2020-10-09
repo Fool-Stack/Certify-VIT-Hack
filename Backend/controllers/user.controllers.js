@@ -121,6 +121,7 @@ const userLogin = (req, res) => {
 				if (result) {
 					const token = jwt.sign(
 						{
+              userId: result[0]._id,
 							userType: user[0].userType,
 							userId: user[0]._id,
 							email: user[0].email,
