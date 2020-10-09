@@ -7,6 +7,8 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 
 ////routers
+const adminRoutes = require('./Backend/routes/admin.routes')
+
 
 const app = express();
 
@@ -35,6 +37,8 @@ const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
 	max: 150, // limit each IP to 100 requests per windowMs
 });
+
+app.use('/admin', adminRoutes);
 
 //  apply to all requests
 app.use(limiter);
