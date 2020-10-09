@@ -5,6 +5,7 @@ import Landing from "./pages/Landing/Landing";
 import ErrorPage from "./pages/ErrorPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import LoginPage from "./pages/Login/LoginPage";
+import SignupPage from "./pages/Signup/SignupPage";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 				<Route exact path="/" component={Landing} />
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/login" component={LoginPage} />
+				<Route exact path="/register" component={SignupPage} />
 				<Route path="*" component={ErrorPage} />
 			</Switch>
 		</Router>

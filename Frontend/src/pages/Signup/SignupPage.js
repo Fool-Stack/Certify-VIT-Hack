@@ -1,15 +1,15 @@
 import {
-    Container, Typography, Button, InputAdornment, IconButton
+	Container, Typography, Button, InputAdornment, IconButton
 } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "../../components/TextInput/TextInput";
 import Navbar from "../../components/Navbar/Navbar";
-import "./LoginPage.css";
+// import "./SignupPage.css";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
-function LoginPage() {
-    const [email, changeEmail] = useState("");
+function SignupPage() {
+	const [email, changeEmail] = useState("");
 	const [emailError, setEmailError] = useState("");
 	const [emailChanged, setEmailChanged] = useState(false);
 	const [password, changePassword] = useState("");
@@ -52,36 +52,43 @@ function LoginPage() {
 		if (event.key === "Enter") {
 			handleSubmit();
 		}
-    };
-    
-    const handleSubmit = () => {
+	};
 
-    }
+	const handleSubmit = () => {
 
-    return (
-        <>
-            <Navbar />
-            <Container className="login-page">
-                <Typography variant="h3" color="primary" className="login-head">
-                    Login
+	}
+
+	return (
+		<>
+			<Navbar />
+			<Container className="login-page">
+				<Typography variant="h3" color="primary" className="login-head">
+					Sign Up
                 </Typography>
-                <br />
-                <form className="form">
-                    <TextInput
-                        id="email"
-                        label="Email"
-                        type="email"
-                        className="form-input"
-                        variant="outlined"
-                    ></TextInput>
-                    <br />
-                    <TextInput
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        label="Password"
-                        className="form-input"
-                        variant="outlined"
-                        value={password}
+				<br />
+				<form className="form">
+					<TextInput
+						id="name"
+						label="Name"
+						type="text"
+						className="form-input"
+						variant="outlined"
+					></TextInput>
+					<TextInput
+						id="email"
+						label="Email"
+						type="email"
+						className="form-input"
+						variant="outlined"
+					></TextInput>
+					<br />
+					<TextInput
+						id="password"
+						type={showPassword ? "text" : "password"}
+						label="Password"
+						className="form-input"
+						variant="outlined"
+						value={password}
 						onChange={handlePasswordChange}
 						onKeyPress={keyPress}
 						InputProps={{
@@ -95,26 +102,26 @@ function LoginPage() {
 										{showPassword ? (
 											<Visibility />
 										) : (
-											<VisibilityOff />
-										)}
+												<VisibilityOff />
+											)}
 									</IconButton>
 								</InputAdornment>
 							),
 						}}
-                    ></TextInput>
-                </form>
-                <Button className="login-btn">
-                    Login
+					></TextInput>
+				</form>
+				<Button className="login-btn">
+					Sign Up
 				    </Button>
-                <Typography variant="h6" color="primary">
-                    --- OR ---
+				<Typography variant="h6" color="primary">
+					--- OR ---
                     </Typography>
-                <Link to={`/register`}><Button className="login-btn-outline">
-                    Register
+				<Link to={`/login`}><Button className="login-btn-outline">
+					Login
 				    </Button></Link>
-            </Container>
-        </>
-    );
+			</Container>
+		</>
+	);
 }
 
-export default LoginPage;
+export default SignupPage;
