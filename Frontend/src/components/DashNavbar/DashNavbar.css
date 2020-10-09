@@ -1,0 +1,22 @@
+/* Some classes in Navbar.css */
+
+.nav-name-tag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2rem;
+}
+
+.profile-avatar {
+	width: 35px !important;
+	height: 35px !important;
+	margin-left: 1% !important;
+}
+
+.nav-drawer-icon {
+	color: rgb(209, 207, 207) !important;
+}
+
+.m-right {
+	margin-left: 3%;
+}
