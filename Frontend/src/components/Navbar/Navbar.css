@@ -1,11 +1,10 @@
 .navbar {
-	background-color: #111111 !important;
+	background-color: transparent !important;
+	padding: 1.5% 2%;
 }
 
-.nav-head {
-	font-weight: bold !important;
-	font-size: 1.5rem !important;
-	letter-spacing: 1.5px !important;
+.nav-logo {
+	object-fit: contain !important;
 }
 
 .nav-menu {

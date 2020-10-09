@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
 	return (
-		<AppBar position="static" className="navbar">
+		<AppBar position="static" className="navbar" elevation={0}>
 			<Toolbar className="nav-toolbar">
-				<Typography variant="h6" className="nav-head secondary-color">
-					Certi.fy
-				</Typography>
+				<img
+					src="./assets/certify.svg"
+					alt="brand logo"
+					width={150}
+					className="nav-logo"
+				/>
 				<div className="nav-menu">
 					<ul className="nav-links">
 						<li>
