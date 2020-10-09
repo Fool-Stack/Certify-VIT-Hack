@@ -2,7 +2,7 @@ const shortid = require('shortid')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const sgMail = require('@sendgrid/mail');
-const JWT = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const Admin = require('../models/admin');
 const User = require('../models/user');
 const Event = require('../models/event');
@@ -52,9 +52,9 @@ const adminRegister = (req, res) => {
 										// 	})
 										// 	.catch((err) => {
                     //     console.log(err)
-                    //     const code = HTTPStatus['500']
-                    //     const message = HTTPStatus['500_MESSAGE']
-                    //     return sendJSONResponse(res, code, message)
+                        // res.status(500).json({
+                        //   message: err.toString()
+                        // })
                     //   });
                       console.log(`User created ${result}`)
                       res.status(201).json({
@@ -91,6 +91,70 @@ const adminRegister = (req, res) => {
     });
 }
 
+
+const adminLogin = (req, res) => {
+	Admin.find({ email: req.body.email })
+		.exec()
+		.then((user) => {
+      console.log(user)
+			if (user.length < 1) {
+				return res.status(401).json({
+					message: "Auth failed: Email not found probably",
+				});
+			}
+			// if (user[0].is_email_verified === false) {
+      //   console.log("Please Verify your Email")
+			// 	return res.status(409).json({
+			// 		message: "Please verify your email",
+			// 	});
+			// }
+			bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+				if (err) {
+          console.log(err)
+					return res.status(401).json({
+						message: "Auth failed",
+					});
+				}
+				if (result) {
+					const token = jwt.sign(
+						{
+							userType: user[0].userType,
+							userId: user[0]._id,
+							email: user[0].email,
+							name: user[0].name,
+							mobileNumber: user[0].mobileNumber,
+						},
+						process.env.jwtSecret,
+						{
+							expiresIn: "1d",
+						}
+          );
+          console.log(user[0])
+					return res.status(200).json({
+						message: "Auth successful",
+						userDetails: {
+							userType: user[0].userType,
+							userId: user[0]._id,
+							name: user[0].name,
+							email: user[0].email,
+							mobileNumber: user[0].mobileNumber,
+						},
+						token: token,
+					});
+				}
+				res.status(401).json({
+					message: "Auth failed1",
+				});
+			});
+		})
+		.catch((err) => {
+			res.status(500).json({
+				error: err,
+			});
+		});
+}
+
 module.exports = {
-  adminRegister
+  adminRegister,
+  adminLogin,
 }

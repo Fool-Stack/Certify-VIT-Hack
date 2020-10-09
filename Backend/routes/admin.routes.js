@@ -4,6 +4,7 @@ const checkAuthAdmin = require('../middleware/checkAuthAdmin');
 const adminControllers = require('../controllers/admin.controllers')
 const router = express.Router();
 
-router.post('/signup', adminControllers.adminRegister)
+router.post('/signup', adminControllers.adminRegister);
+router.post('/login', adminControllers.adminLogin);
 
 module.exports = router
