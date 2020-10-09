@@ -14,6 +14,7 @@ const eventSchema = mongoose.Schema({
   }],
   date: { type: Date },
   no_of_participants: { type: Number },
+  admin_access_code: { type: String },
 });
 
 module.exports = mongoose.model("Event", eventSchema);
