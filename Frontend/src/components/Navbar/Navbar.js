@@ -1,22 +1,28 @@
 import React from "react";
-import {
-	AppBar,
-	Button,
-	IconButton,
-	Toolbar,
-	Typography,
-} from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 function Navbar() {
 	return (
-		<AppBar position="static">
-			<Toolbar>
-				<IconButton edge="start" color="inherit" aria-label="menu">
-					<Menu />
-				</IconButton>
-				<Typography variant="h6">News</Typography>
-				<Button color="inherit">Login</Button>
+		<AppBar position="static" className="navbar">
+			<Toolbar className="nav-toolbar">
+				<Typography variant="h6" className="nav-head secondary-color">
+					Certi.fy
+				</Typography>
+				<div className="nav-menu">
+					<ul className="nav-links">
+						<li>
+							<Link to="/login">Login</Link>
+						</li>
+						<li>
+							<Link to="/register">Register</Link>
+						</li>
+						<li>
+							<Link to="/about">About</Link>
+						</li>
+					</ul>
+				</div>
 			</Toolbar>
 		</AppBar>
 	);
