@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.post('/signup', adminControllers.adminRegister);
 router.post('/login', adminControllers.adminLogin);
+router.patch('/verifyEmail', adminControllers.verifyEmail);
 
 module.exports = router
