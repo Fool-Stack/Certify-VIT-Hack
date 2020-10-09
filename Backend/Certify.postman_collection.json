@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "4d7d9310-a05a-4758-9da2-9fe5b9efeffd",
+		"name": "Certify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Jugal Bhatt\",\r\n    \"email\": \"jugalbhatt3@gmail.com\",\r\n    \"password\": \"helloworld\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/signup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Jugal Bhatt\",\r\n    \"email\": \"jugalbhatt3@gmail.com\",\r\n    \"password\": \"helloworld\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/signup",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"signup"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "106"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6a-rbFC5C131z7+CibmxpMCra6pJPk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Oct 2020 11:39:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userDetails\": {\n        \"userId\": \"5f804bfeb052893d5455ca63\",\n        \"email\": \"jugalbhatt3@gmail.com\",\n        \"name\": \"Jugal Bhatt\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jugalbhatt3@gmail.com\",\r\n    \"password\": \"helloworld\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"jugalbhatt3@gmail.com\",\r\n    \"password\": \"helloworld\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "392"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"188-WxoHeiZA7d7fcLTkNZ+TUUGBzMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Oct 2020 11:39:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Auth successful\",\n    \"userDetails\": {\n        \"userId\": \"5f804bfeb052893d5455ca63\",\n        \"name\": \"Jugal Bhatt\",\n        \"email\": \"jugalbhatt3@gmail.com\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwNGJmZWIwNTI4OTNkNTQ1NWNhNjMiLCJlbWFpbCI6Imp1Z2FsYmhhdHQzQGdtYWlsLmNvbSIsIm5hbWUiOiJKdWdhbCBCaGF0dCIsImlhdCI6MTYwMjI0MzU5MCwiZXhwIjoxNjAyMzI5OTkwfQ.SDU6XMw8P6q5f-s_PMpvXDEWZIKJUhzt7IcFARov8Ac\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Verify Email",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"verification_key\": \"gUrHf8itR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/verifyEmail",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"verifyEmail"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Verify Email",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"verification_key\": \"2WyEIBwJV\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/verifyEmail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"verifyEmail"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-HXtAB+JlB0Om24wHUKSwW5r3qzs\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Oct 2020 12:11:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User verified\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Resend Verification Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"jugalbhatt3@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/resendverificationemail",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"resendverificationemail"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Resend Verification Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"jugalbhatt3@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/resendverificationemail",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"resendverificationemail"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-lCDz3SNQb10Ki/TSHQChhdEFoYI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Oct 2020 12:39:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email verification key sent to email\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Add event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwNTRmNTY3MTBjMTRhMjBiYzQ0OTAiLCJlbWFpbCI6Imp1Z2FsYmhhdHQzQGdtYWlsLmNvbSIsIm5hbWUiOiJKdWdhbCBCaGF0dCIsImlhdCI6MTYwMjI1MDc0NCwiZXhwIjoxNjAyMzM3MTQ0fQ.EsUqbrwrlksd285f5Q2ajWMRWOqEJrml41LMntRvwt0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"suc\",\r\n    \"date\":\"10-10-2020\",\r\n    \"secret\":\"ThisIsATestAdminCode\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/event/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwNTRmNTY3MTBjMTRhMjBiYzQ0OTAiLCJlbWFpbCI6Imp1Z2FsYmhhdHQzQGdtYWlsLmNvbSIsIm5hbWUiOiJKdWdhbCBCaGF0dCIsImlhdCI6MTYwMjI1MDc0NCwiZXhwIjoxNjAyMzM3MTQ0fQ.EsUqbrwrlksd285f5Q2ajWMRWOqEJrml41LMntRvwt0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"suc\",\r\n    \"date\":\"10-10-2020\",\r\n    \"secret\":\"ThisIsATestAdminCode\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/event/add",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event",
+										"add"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "203"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cb-QPluKBO1I/IarNrXogQR/qZp9uU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Oct 2020 13:49:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"event\": {\n        \"_id\": \"5f806a6935dbf391dcb1637f\",\n        \"name\": \"suc\",\n        \"date\": \"2020-10-09T18:30:00.000Z\",\n        \"created_by\": \"5f8054f56710c14a20bc4490\",\n        \"admins\": [\n            {\n                \"_id\": \"5f8054f56710c14a20bc4490\"\n            }\n        ],\n        \"participants\": [],\n        \"__v\": 1\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
