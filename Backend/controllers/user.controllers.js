@@ -1,11 +1,14 @@
 const shortid = require('shortid')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+require('dotenv').config()
 const sgMail = require('@sendgrid/mail');
 const jwt = require('jsonwebtoken');
-const Admin = require('../models/admin');
 const User = require('../models/user');
 const Event = require('../models/event');
+const emailTemplates = require('../emails/email');
+
+sgMail.setApiKey(process.env.SendgridAPIKey);
 
 const userRegister = (req, res) => {
 	User.find({ email: req.body.email })
@@ -32,30 +35,30 @@ const userRegister = (req, res) => {
 						user
 							.save()
 							.then(async (result) => {
-								result.verificationKey = shortid.generate();
-								result.verificationKeyExpires =
+								result.verification_key = shortid.generate();
+								result.verification_key_expires =
 									new Date().getTime() + 20 * 60 * 1000;
 								await result
 									.save()
 									.then((result1) => {
-										// const msg = {
-										// 	to: result.email,
-										// 	from: process.env.sendgridEmail,
-										// 	subject: "Certify: Email Verification",
-										// 	text: " ",
-										// 	html: emailTemplates.VERIFY_EMAIL(result1),
-										// };
-										// sgMail
-										// 	.send(msg)
-										// 	.then((result) => {
-										// 		console.log("Email sent");
-										// 	})
-										// 	.catch((err) => {
-                    //     console.log(err)
-                        // res.status(500).json({
-                        //   message: err.toString()
-                        // })
-                    //   });
+										const msg = {
+											to: result.email,
+											from: process.env.sendgridEmail,
+											subject: "Certify: Email Verification",
+											text: " ",
+											html: emailTemplates.VERIFY_EMAIL(result1),
+										};
+										sgMail
+											.send(msg)
+											.then((result) => {
+												console.log("Email sent");
+											})
+											.catch((err) => {
+                        console.log(err)
+                        res.status(500).json({
+                          message: err.toString()
+                        })
+                      });
                       console.log(`User created ${result}`)
                       res.status(201).json({
                         userDetails: {
@@ -102,12 +105,12 @@ const userLogin = (req, res) => {
 					message: "Auth failed: Email not found probably",
 				});
 			}
-			// if (user[0].is_email_verified === false) {
-      //   console.log("Please Verify your Email")
-			// 	return res.status(409).json({
-			// 		message: "Please verify your email",
-			// 	});
-			// }
+			if (user[0].is_email_verified === false) {
+        console.log("Please Verify your Email")
+				return res.status(409).json({
+					message: "Please verify your email",
+				});
+			}
 			bcrypt.compare(req.body.password, user[0].password, (err, result) => {
 				if (err) {
           console.log(err)
@@ -154,7 +157,104 @@ const userLogin = (req, res) => {
 		});
 }
 
+
+const verifyEmail = async (req, res) => {
+  const { verification_key } = req.body;
+	await User.findOne({ verification_key })
+		.then(async (user) => {
+			if (Date.now() > user.verification_key_expires) {
+				res.status(401).json({
+					message: "Pass key expired",
+				});
+			}
+			user.verification_key = null;
+			user.verification_key_expires = null;
+			user.is_email_verified = true;
+			await user
+				.save()
+				.then((result1) => {
+					res.status(200).json({
+						message: "User verified",
+					});
+				})
+				.catch((err) => {
+					res.status(400).json({
+						message: "Some error",
+						error: err.toString(),
+					});
+				});
+		})
+		.catch((err) => {
+			res.status(409).json({
+				message: "Invalid verification key",
+				error: err.toString(),
+			});
+    });
+}
+
+const resendVerifyMail = async (req, res) => {
+  const { email } = req.body;
+	const user = await User.findOne({ email });
+	if (user) {
+    user.verification_key = shortid.generate();
+		user.verification_key_expires = new Date().getTime() + 20 * 60 * 1000;
+		await user
+			.save()
+			.then((result) => {
+        console.log(result)
+				const msg = {
+					to: email,
+					from: process.env.sendgridEmail,
+					subject: "Quzzie: Email Verification",
+					text: " ",
+					html: emailTemplates.VERIFY_EMAIL(result),
+				};
+
+				sgMail
+					.send(msg)
+					.then((result) => {
+						res.status(200).json({
+							message: "Email verification key sent to email",
+						});
+					})
+					.catch((err) => {
+            console.log(err)
+						res.status(500).json({
+							// message: "something went wrong1",
+							error: err.toString(),
+						});
+					});
+			})
+			.catch((err) => {
+        console.log(err)
+				res.status(400).json({
+					message: "Some error occurred",
+					error: err.toString(),
+				});
+			});
+	}
+}
+
+const seeAllEvents = async (req, res) => {
+  const _id = req.user.userId
+  const user = await User.findById( _id )
+  if(user){
+    return res.status(200).json({
+      message: 'Events found',
+      events: user.events
+    })
+  }
+  else{
+    return res.status(404).json({
+      message: 'User not found'
+    })
+  }
+}
+
 module.exports = {
   userRegister,
   userLogin,
+  verifyEmail,
+  resendVerifyMail,
+  seeAllEvents,
 }
