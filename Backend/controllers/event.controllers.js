@@ -118,6 +118,7 @@ const updateEvent = async(req, res) => {
 
 const getCertificates = async (req, res) => {
   const html = [];
+  const event_id = req.body.event_id
   const users = await csv().fromFile(req.file.path);
   fs.unlinkSync(req.file.path);
   console.log(users)
@@ -127,16 +128,23 @@ const getCertificates = async (req, res) => {
   console.log('html DOne')
 
   for(let i = 0; i < users.length; i++){
-    const filename = 'gg' + Date.now()
+    
+     const filename = 'gg' + Date.now()
     pdf.create(html[i], {}).toStream(function(err, stream) {
       if (err) return console.log(err)
-      uploadToS3(stream, filename)
+      if(i==users.length-1){
+      uploadToS3(res,stream, filename,users[i].email,event_id,true)
+      }
+      else{
+        uploadToS3(res,stream, filename,users[i].email,event_id,false)
+      }
+
     });
   }
   console.log(users)
 }
 
-const uploadToS3 = (body, filename) => {
+const uploadToS3 = async (res,body, filename,email,event_id,isLast) => {
   AWS.config.update({
     accessKeyId: process.env.AWS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS
@@ -150,8 +158,21 @@ const uploadToS3 = (body, filename) => {
     Bucket: process.env.AWS_S3_BUCKET,
     Key: filename +'.pdf'
   };
-  s3.upload(params, function(err, data) {
+  await s3.upload(params, async function(err, data) {
     console.log(err, data);
+   await User.updateOne({email:email},{$push:{events:{event_id:event_id,certificate_link:data.Location}}}).then(()=>{
+      console.log("lolgg")
+      if(isLast){
+         return res.status(200).json({
+            message : "chintu koding"
+          })
+      }
+      else{
+      return;
+      }
+    }).catch((err)=>{
+     throw err
+    })
   });
 }
 
