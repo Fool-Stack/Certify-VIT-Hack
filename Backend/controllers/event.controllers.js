@@ -10,6 +10,8 @@ const fs = require('fs');
 const User = require('../models/user');
 const Event = require('../models/event');
 const htmlTemplates = require('../templates/html-1');
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
 
 sgMail.setApiKey(process.env.SendgridAPIKey);
 
@@ -115,9 +117,42 @@ const updateEvent = async(req, res) => {
 // })
 
 const getCertificates = async (req, res) => {
+  const html = [];
   const users = await csv().fromFile(req.file.path);
   fs.unlinkSync(req.file.path);
   console.log(users)
+  for(let i = 0; i < users.length; i++){
+    html.push(htmlTemplates.TEMPLATE_1(users[i]))
+  }
+  console.log('html DOne')
+
+  for(let i = 0; i < users.length; i++){
+    const filename = 'gg' + Date.now()
+    pdf.create(html[i], {}).toStream(function(err, stream) {
+      if (err) return console.log(err)
+      uploadToS3(stream, filename)
+    });
+  }
+  console.log(users)
+}
+
+const uploadToS3 = (body, filename) => {
+  AWS.config.update({
+    accessKeyId: process.env.AWS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS
+  });
+
+  var s3 = new AWS.S3();
+
+  var params = {
+    Body: body,
+    ACL: 'public-read',
+    Bucket: process.env.AWS_S3_BUCKET,
+    Key: filename +'.pdf'
+  };
+  s3.upload(params, function(err, data) {
+    console.log(err, data);
+  });
 }
 
 module.exports= {
