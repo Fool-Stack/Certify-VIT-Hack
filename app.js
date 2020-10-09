@@ -7,7 +7,7 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 
 ////routers
-
+const eventRoutes = require('./Backend/routes/event.routes')
 const userRoutes = require('./Backend/routes/user.routes')
 
 const app = express();
@@ -39,7 +39,7 @@ const limiter = rateLimit({
 });
 
 app.use('/user', userRoutes);
-
+app.use('/event',eventRoutes)
 //  apply to all requests
 app.use(limiter);
 

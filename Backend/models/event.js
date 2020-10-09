@@ -11,8 +11,8 @@ const eventSchema = mongoose.Schema({
     participant_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     certificate_link: { type: String }
   }],
+  created_by :{ type: mongoose.Schema.Types.ObjectId, ref: "User" },
   date: { type: Date },
-  no_of_participants: { type: Number },
   admin_access_code: { type: String },
 });
 
