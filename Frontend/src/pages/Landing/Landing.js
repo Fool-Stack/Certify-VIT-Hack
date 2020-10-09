@@ -3,6 +3,9 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Landing.css";
 import ReactTypingEffect from "react-typing-effect";
+import ActionButton from "../../components/ActionButton/ActionButton";
+import { ArrowForward } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 function Landing() {
 	return (
@@ -22,8 +25,18 @@ function Landing() {
 									text={["safe", "secure", "easy-to-use"]}
 								/>
 							</span>{" "}
-							platform
+							platform.
 						</h1>
+						<div className="jumbo-btn-div">
+							<Link to="/login">
+								<ActionButton>
+									<span style={{ marginRight: "10px" }}>
+										Start now
+									</span>
+									<ArrowForward />
+								</ActionButton>
+							</Link>
+						</div>
 					</div>
 				</Grid>
 			</Grid>
