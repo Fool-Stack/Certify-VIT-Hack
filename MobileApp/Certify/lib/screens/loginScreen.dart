@@ -1,4 +1,5 @@
 import 'package:Certify/animations/bounceIn.dart';
+import 'package:Certify/screens/signUpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -213,8 +214,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     size.height * 1 / 100,
                   ),
                   child: FlatButton(
-                    onPressed: () {},
-                    splashColor: Theme.of(context).canvasColor,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        BounceIn(
+                          widget: SignUpPage(),
+                        ),
+                      );
+                    },
+                    splashColor: Theme.of(context).backgroundColor,
                     child: Center(
                       child: Text(
                         "Sign Up",
