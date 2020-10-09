@@ -198,6 +198,10 @@ const verifyEmail = async (req, res) => {
     });
 }
 
+// const resendVerifyMail = (req, res) => {
+
+// }
+
 module.exports = {
   adminRegister,
   adminLogin,
