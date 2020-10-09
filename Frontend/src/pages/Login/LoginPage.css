@@ -1,0 +1,106 @@
+.login-page {
+	height: calc(100vh - 64px);
+	display: flex !important;
+	justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-page .MuiFormLabel-root {
+	font-family: "Montserrat", sans-serif !important;
+}
+
+.form {
+	margin-top: 5%;
+	width: 50%;
+	text-align: center;
+}
+
+.login-head {
+	font-family: 'Montserrat', sans-serif !important;
+	color: #5757ff !important;
+}
+
+@media screen and (max-width: 950px) {
+	.login-head {
+		font-size: 2.5rem !important;
+	}
+}
+
+@media screen and (max-width: 600px) {
+    .form {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 440px) {
+	.login-head {
+		font-size: 2rem !important;
+	}
+}
+
+.form-input {
+	margin: 5px 0 !important;
+	width: 100% !important;
+}
+
+.form-input input {
+    border-radius: 30px !important;
+}
+
+.forgot-section {
+	display: flex;
+	width: 80%;
+	margin-bottom: 5%;
+}
+
+.forgot-pass {
+	font-size: 0.8rem !important;
+}
+
+.forgot-pass:hover {
+	text-decoration: underline;
+}
+
+.login-btn {
+	width: 150px;
+    background-color: #5757ff !important;
+    color: #dddddd !important;
+    border-radius: 25px !important;
+    padding: 12px 30px !important;
+    border: none;
+    font-size: 1rem !important;
+	margin-top: 5% !important;
+	margin-bottom: 5% !important;
+	font-family: "Montserrat", sans-serif !important;
+	text-transform: none !important;
+}
+
+.login-btn:hover {
+    color: #ffffff;
+}
+
+.login-btn-outline {
+	width: 150px;
+    border: 2px solid #5757ff !important;
+    color: #5757ff !important;
+    border-radius: 25px !important;
+    padding: 12px 30px !important;
+    border: none;
+    font-size: 1rem !important;
+	margin-top: 5% !important;
+	margin-bottom: 5% !important;
+	font-family: "Montserrat", sans-serif !important;
+	text-transform: none !important;
+}
+
+.login-btn-outline:hover {
+    color: #ffffff !important;
+    background-color: #5757ff !important;
+}
+
+@media screen and (max-width: 400px) {
+	.MuiInputLabel-outlined {
+		font-size: 0.8rem !important;
+	}
+}
