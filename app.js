@@ -8,7 +8,8 @@ const rateLimit = require("express-rate-limit");
 
 ////routers
 const eventRoutes = require('./Backend/routes/event.routes')
-const userRoutes = require('./Backend/routes/user.routes')
+const userRoutes = require('./Backend/routes/user.routes');
+const s3UploadClient = require("./Backend/middleware/s3UploadClient");
 
 const app = express();
 
@@ -37,6 +38,13 @@ const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
 	max: 150, // limit each IP to 100 requests per windowMs
 });
+
+app.post("/upload", s3UploadClient.upload.array("inputFile", 1) , async (req,res)=>{
+		res.status(200).json({
+			body: req.files[0].location,
+		})
+
+} )
 
 app.use('/user', userRoutes);
 app.use('/event',eventRoutes)
