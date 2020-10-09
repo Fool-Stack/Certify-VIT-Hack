@@ -12,3 +12,11 @@
 	height: 35px !important;
 	margin-left: 1% !important;
 }
+
+.nav-drawer-icon {
+	color: rgb(209, 207, 207) !important;
+}
+
+.m-right {
+	margin-left: 3%;
+}

@@ -1,0 +1,11 @@
+.dashboard-page {
+	transition: ease-in-out 0.2s;
+}
+
+.dash-screen {
+	padding-left: 4%;
+}
+
+.dash-drawer .MuiDrawer-paper {
+	width: 200px !important;
+}
