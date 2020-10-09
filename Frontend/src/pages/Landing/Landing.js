@@ -14,6 +14,9 @@ function Landing() {
 			<Grid container>
 				<Grid item sm={12} md={6}>
 					<div className="jumbo-div">
+						<h1 className="jumbo-text sub-jumbo-text ">
+							Tired of losing all your certficates?
+						</h1>
 						<h1 className="jumbo-text">
 							All your certificates in one{" "}
 							<span className="secondary-color">
