@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
   },
   events: [{
     event_id: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
-    certificate_link: certificate_link: { type: String }
+    certificate_link: { type: String }
   }],
 	password: { type: String},
   token: { type: String,},
