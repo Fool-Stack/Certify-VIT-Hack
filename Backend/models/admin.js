@@ -13,7 +13,9 @@ const adminSchema = mongoose.Schema({
 		match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
   },
   events: [{
-    event_id: { type: mongoose.Schema.Types.ObjectId, ref: "Event" }
+    event_id: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
+    is_admin: { type: Boolean },
+    certificate_link: { type: String }
   }],
 	password: { type: String},
   token: { type: String,},
