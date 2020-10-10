@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: Color(0xffdddddd),
         accentColor: Color(0xff5757ff),
+        cardColor: Color(0xff1f1f1f),
         backgroundColor: Color(0xff111111),
       ),
       home: LoginScreen(),
