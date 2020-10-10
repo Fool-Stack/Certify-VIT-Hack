@@ -1,13 +1,12 @@
 import {
 	Container,
 	Typography,
-	Button,
 	InputAdornment,
 	IconButton,
-	Divider,
+	CircularProgress,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import TextInput from "../../components/TextInput/TextInput";
 import Navbar from "../../components/Navbar/Navbar";
 import "./LoginPage.css";
@@ -25,7 +24,6 @@ function LoginPage() {
 
 	const [showPassword, setShowPassword] = useState(false);
 
-	const [didLogin, setDidLogin] = useState(null);
 	const [errorText, setErrorText] = useState(
 		"Error Logging In! Try again...."
 	);
@@ -37,6 +35,7 @@ function LoginPage() {
 	const [verifyMail, setVerifyMail] = useState("");
 
 	const [isLoading, setLoading] = useState(false);
+	const [success, setSuccess] = useState(false);
 
 	const mailErrorText = "Email cannot be empty";
 	const passwordErrorText = "Password cannot be empty";
@@ -63,9 +62,34 @@ function LoginPage() {
 		}
 	};
 
-	const handleSubmit = () => {
-		const url = `${backend}/`;
+	const handleSubmit = async () => {
+		const url = `${backend}/user/login`;
+		setLoading(true);
+
+		const data = {
+			email,
+			password,
+		};
+
+		console.log(data, url);
+		try {
+			await axios.post(url, data).then((res) => {
+				console.log(res);
+				localStorage.setItem("authToken", res.data.token);
+				localStorage.setItem("name", res.data.userDetails.name);
+				setLoading(false);
+				setSuccess(true);
+			});
+		} catch (error) {
+			console.log(error);
+			changePassword("");
+			setLoading(false);
+		}
 	};
+
+	if (success) {
+		return <Redirect to="/dashboard" />;
+	}
 
 	return (
 		<>
@@ -82,6 +106,7 @@ function LoginPage() {
 						className="form-input"
 						variant="outlined"
 						value={email}
+						onChange={handleEmailChange}
 					></TextInput>
 					<br />
 					<TextInput
@@ -115,7 +140,21 @@ function LoginPage() {
 				</form>
 				<br />
 				<div className="login-btn-div">
-					<ActionButton className="login-btn">LOGIN</ActionButton>
+					<ActionButton
+						className="login-btn"
+						onClick={handleSubmit}
+						disabled={isLoading ? true : false}
+					>
+						{!isLoading ? (
+							"LOGIN"
+						) : (
+							<CircularProgress
+								color="secondary"
+								size={20}
+								thickness={5}
+							/>
+						)}
+					</ActionButton>
 					<Typography
 						variant="h6"
 						color="primary"
