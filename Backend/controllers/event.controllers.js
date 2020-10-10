@@ -131,7 +131,8 @@ const getCertificates = async (req, res, next) => {
   fs.unlinkSync(req.file.path);
   // console.log(users)
   for(let i = 0; i < users.length; i++){
-    const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + shortid.generate()
+    const auth_params = shortid.generate()
+    const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + auth_params
     users[i].link = QRCodeLINK
     const qr = await qrcode.toDataURL(QRCodeLINK)
     console.log(QRCodeLINK)
@@ -167,13 +168,13 @@ const getCertificates = async (req, res, next) => {
           html.push(htmlTemplates.TEMPLATE_3(users[i],data.Location))
         }
         const filename = 'gg' + Date.now()
-        await pdf.create(html[i], { height:"375px", width:"600px", timeout: '100000' }).toStream(async function(err, stream) {
+        await pdf.create(html[i], { height:"375px", width:"620px", timeout: '100000' }).toStream(async function(err, stream) {
           if (err) return console.log(err)
           if(i==users.length-1){
-         await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK)
+         await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK, auth_params)
           }
           else{
-          await   uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, QRCodeLINK)
+          await   uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, QRCodeLINK ,auth_params)
           }
     
         });
@@ -190,7 +191,7 @@ const getCertificates = async (req, res, next) => {
   console.log(users)
 }
 
-const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCodeLINK) => {
+const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCodeLINK ,auth_params) => {
   AWS.config.update({
     accessKeyId: process.env.AWS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS
@@ -273,6 +274,7 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCode
       _id:new mongoose.Types.ObjectId(),
        certificate_link: data.Location,
        auth_link: QRCodeLINK,
+       auth_params: auth_params,
        event_id: event_id,
        user_name: name,
        user_email: email,

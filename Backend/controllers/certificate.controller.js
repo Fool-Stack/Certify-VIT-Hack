@@ -16,12 +16,13 @@ var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 
 const viewCertificateDetailsFromQrCode = async (req, res, next) => {
-  const { certificate_params } = req.params
-  const certificate = await Certificate.findOne({ auth_link: "https://certify.jugaldb.com/?id=" + certificate_params})
-  if(certificate){
+  const { auth_params } = req.params
+  const certificateDoc = await Certificate.findOne({ auth_params}).populate('event_id')
+  console.log(certificateDoc)
+  if(certificateDoc){
     res.status(200).json({
       message: "This certificate is valid",
-      certificate,
+      certificateDoc,
     })
   } else { 
     res.status(403).json({
