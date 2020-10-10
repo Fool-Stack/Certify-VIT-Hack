@@ -1,3 +1,5 @@
+import 'package:Certify/animations/bounceIn.dart';
+import 'package:Certify/screens/addParticipantsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -156,7 +158,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     MediaQuery.of(context).size.height * 1 / 100,
                   ),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        BounceIn(
+                          widget: AddParticipantsScreen(),
+                        ),
+                      );
+                    },
                     splashColor: Theme.of(context).accentColor,
                     child: Center(
                       child: Text(
