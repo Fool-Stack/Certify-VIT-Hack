@@ -7,7 +7,7 @@ import {
 	ListItem,
 	ListItemText,
 } from "@material-ui/core";
-import { Add, AddCircle } from "@material-ui/icons";
+import { Add, AddCircle, GetApp } from "@material-ui/icons";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import ActionButton from "../../components/ActionButton/ActionButton";
@@ -59,6 +59,8 @@ function EventPage(props) {
 			}).then((res) => {
 				console.log(res);
 				setSubmitLoading(false);
+				setFile(null);
+				onCloseHandle();
 			});
 		} catch (error) {
 			console.log(error);
@@ -129,14 +131,17 @@ function EventPage(props) {
 							) : (
 								<List>
 									{details.participants.map((participant) => (
-										<ListItem>
-											<ListItemText
-												primary={
-													participant.participant_name
-												}
-												secondary={`Email: ${participant.participant_email}`}
-											/>
-										</ListItem>
+										<div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}} className="participant-item">
+											<ListItem>
+												<ListItemText
+													primary={
+														participant.participant_name.toUpperCase()
+													}
+													secondary={`Email: ${participant.participant_email}`}
+												/>
+											</ListItem>
+											<ActionButton download={true} link={participant.certificate_link}><GetApp /></ActionButton>
+										</div>
 									))}
 								</List>
 							)}
@@ -173,9 +178,11 @@ function EventPage(props) {
 											style={{
 												color: "rgb(160, 160, 160)",
 											}}
-										>
-											Drag 'n' drop or click to select a
-											CSV file
+										>	
+										{file? `Selected file: ${file.name}`
+										:
+											"Drag 'n' drop or click to select a CSV file"
+										}
 										</p>
 									</div>
 								</section>

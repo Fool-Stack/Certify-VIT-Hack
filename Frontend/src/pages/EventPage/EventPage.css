@@ -55,3 +55,24 @@
 	margin-top: 10%;
 	text-align: center;
 }
+
+.participants-list {
+	margin-top: 2%;
+	margin-bottom: 5%;
+}
+
+.participant-item {
+	/* background-color: black; */
+	border-bottom: 0.5px lightgray solid;
+}
+
+.MuiListItemText-primary {
+	font-weight: 900 !important;
+	font-family: "Inter", sans-serif !important;
+	font-size: 1.5rem !important;
+	color: #5757ff !important;
+}
+
+.MuiListItemText-secondary {
+	color: white !important;
+}
