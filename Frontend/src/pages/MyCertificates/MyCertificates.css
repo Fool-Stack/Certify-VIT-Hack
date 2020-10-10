@@ -1,6 +1,7 @@
 .section-heading {
 	font-weight: 900;
 	display: inline-block;
+	font-size: 2.5rem;
 }
 
 .certificates-section {
@@ -10,7 +11,7 @@
 }
 
 .certificate-list {
-	padding-top: 5%;
+	padding-top: 2%;
 	display: flex;
 	justify-content: center;
 	align-items: center;

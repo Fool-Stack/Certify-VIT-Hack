@@ -15,7 +15,9 @@ function Dashboard() {
 	const [refresh, setRefresh] = useState(false);
 
 	const [name, setName] = useState("");
-	const [events, setEvents] = useState([]);
+
+	const [certEvents, setCertEvents] = useState([]);
+	const [createdEvents, setCreatedEvents] = useState([]);
 
 	const [openDash, setOpenDash] = useState(1);
 
@@ -35,7 +37,19 @@ function Dashboard() {
 				},
 			}).then((res) => {
 				console.log(res.data);
-				setEvents(res.data.events);
+				let certs = [];
+				let created = [];
+
+				res.data.events.map((event) => {
+					if (event.is_admin) {
+						created.push(event);
+					} else {
+						certs.push(event);
+					}
+				});
+
+				setCertEvents(certs);
+				setCreatedEvents(created);
 			});
 		} catch (error) {
 			console.log(error);
@@ -84,10 +98,10 @@ function Dashboard() {
 			</Drawer>
 			<div className="dash-screen">
 				<TabPanel value={openDash} index={1}>
-					<MyCertificates events={events} />
+					<MyCertificates events={certEvents} />
 				</TabPanel>
 				<TabPanel value={openDash} index={2}>
-					<MyEvents events={events} setRefresh={setRefresh} />
+					<MyEvents events={createdEvents} setRefresh={setRefresh} />
 				</TabPanel>
 			</div>
 		</div>
