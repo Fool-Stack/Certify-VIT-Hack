@@ -105,12 +105,12 @@ const userLogin = (req, res) => {
 					message: "Auth failed: Email not found probably",
 				});
 			}
-			if (user[0].is_email_verified === false) {
-        console.log("Please Verify your Email")
-				return res.status(409).json({
-					message: "Please verify your email",
-				});
-			}
+			//if (user[0].is_email_verified === false) {
+     //   console.log("Please Verify your Email")
+				//return res.status(409).json({
+				//	message: "Please verify your email",
+				//});
+		//	}
 			bcrypt.compare(req.body.password, user[0].password, (err, result) => {
 				if (err) {
           console.log(err)
