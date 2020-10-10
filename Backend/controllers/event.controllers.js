@@ -9,11 +9,11 @@ const csv = require('csvtojson');
 const fs = require('fs');
 const User = require('../models/user');
 const Event = require('../models/event');
-const Certficate = require('../models/certificate')
+const Certificate = require('../models/certificate')
+const emailTemplates=require('../emails/email')
 const htmlTemplates = require('../templates/html-1');
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
-
 sgMail.setApiKey(process.env.SendgridAPIKey);
 
 const addEvent = async (req , res)=>{
@@ -183,7 +183,7 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCode
                     from: process.env.sendgridEmail,
                     subject: "Certify: Certificate Generation",
                     text: " ",
-                    html: emailTemplates.VERIFY_EMAIL(result1),//////change email
+                    html: emailTemplates.VERIFY_EMAIL(result),//////change email
                   };
                   sgMail
                     .send(msg)
@@ -222,13 +222,15 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCode
       });
     }
    await User.updateOne({email:email},{$push:{events:{event_id:event_id,certificate_link:data.Location}}}).then(async()=>{
-     await Certificate.insert({
+    const certificate= new Certificate({
+      _id:new mongoose.Types.ObjectId(),
        certificate_link: data.Location,
        auth_link: QRCodeLINK,
        user_name: name,
        user_email: email,
      })
-      console.log("lolgg")
+     await certificate.save()
+      console.log(certificate)
       if(isLast){
          return res.status(200).json({
             message : "chintu koding"
