@@ -6,6 +6,7 @@ const certificateSchema = mongoose.Schema({
   certificate_link: { type: String },
   event_id:{ type: mongoose.Schema.Types.ObjectId, ref: "Event" },
   auth_link: {type: String},
+  auth_params: {type: String},
   user_name: { type: String },
   user_email: { type: String }, 
 });

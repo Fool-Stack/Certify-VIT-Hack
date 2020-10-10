@@ -159,12 +159,15 @@ const getCertificates = async (req, res, next) => {
 
         console.log('succesfully uploaded the image!',data.Location);
         if(req.body.templateNumber == 1){
+          console.log('html  ', i)
           html.push(htmlTemplates.TEMPLATE_1(users[i],data.Location))
         }
         else if(req.body.templateNumber == 2) {
+          console.log('html  ', i)
           html.push(htmlTemplates.TEMPLATE_2(users[i],data.Location))
         }
         else{
+          console.log('html  ', i)
           html.push(htmlTemplates.TEMPLATE_3(users[i],data.Location))
         }
         const filename = 'gg' + Date.now()
