@@ -4,8 +4,8 @@ import DashNavbar from "../../components/DashNavbar/DashNavbar";
 import "./Dashboard.css";
 
 function Dashboard() {
-	const [drawerOpen, setDrawerOpen] = useState(true);
-	const drawerWidth = 200;
+	const [drawerOpen, setDrawerOpen] = useState(false);
+	const drawerWidth = 256;
 
 	return (
 		<div

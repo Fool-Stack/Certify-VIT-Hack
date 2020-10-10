@@ -4,7 +4,7 @@ import "./ActionButton.css";
 
 function ActionButton(props) {
 	return (
-		<Button variant="contained" className="action-btn">
+		<Button variant="contained" className={`${props.className} action-btn`}>
 			{props.children}
 		</Button>
 	);

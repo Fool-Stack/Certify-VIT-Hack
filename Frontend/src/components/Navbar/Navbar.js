@@ -7,12 +7,14 @@ function Navbar() {
 	return (
 		<AppBar position="static" className="navbar" elevation={0}>
 			<Toolbar className="nav-toolbar">
-				<img
-					src="./assets/certify.svg"
-					alt="brand logo"
-					width={150}
-					className="nav-logo"
-				/>
+				<Link to="/">
+					<img
+						src="./assets/certify.svg"
+						alt="brand logo"
+						width={150}
+						className="nav-logo"
+					/>
+				</Link>
 				<div className="nav-menu">
 					<ul className="nav-links">
 						<li>
