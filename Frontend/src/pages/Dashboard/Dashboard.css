@@ -1,9 +1,13 @@
 .dashboard-page {
 	transition: ease-in-out 0.2s;
+	display: flex;
+	flex-direction: column;
+	height: 100vh !important;
 }
 
 .dash-screen {
 	padding-left: 4%;
+	flex: 1;
 }
 
 .dash-drawer .MuiDrawer-paper {

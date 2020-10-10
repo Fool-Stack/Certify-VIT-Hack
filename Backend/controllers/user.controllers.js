@@ -238,7 +238,14 @@ const resendVerifyMail = async (req, res, next) => {
 
 const seeAllEvents = async (req, res, next) => {
   const _id = req.user.userId
-  const user = await User.findById( _id )
+  const user = await User.findById( _id )      
+  .populate({
+    path: "events",
+    select: "name participants date",
+    populate:"event_id"
+  })
+  console.log(user)
+  console.log(user.events)
   if(user){
     return res.status(200).json({
       message: 'Events found',

@@ -129,13 +129,15 @@ const getCertificates = async (req, res, next) => {
   const event_id = req.body.event_id
   const users = await csv().fromFile(req.file.path);
   fs.unlinkSync(req.file.path);
-  console.log(users)
+  // console.log(users)
   for(let i = 0; i < users.length; i++){
-    const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + shortid.generate()
-    users[i].link = await qrcode.toDataURL(QRCodeLINK)
+    const auth_params = shortid.generate()
+    const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + auth_params
+    users[i].link = QRCodeLINK
+    const qr = await qrcode.toDataURL(QRCodeLINK)
     console.log(QRCodeLINK)
    // var base64Data = users[i].link.replace(/^data:image\/png;base64,/, "");
-    buff = Buffer.from(users[i].link.replace(/^data:image\/\w+;base64,/, ""),'base64')
+    buff = Buffer.from(qr.replace(/^data:image\/\w+;base64,/, ""),'base64')
    
   var params = {
     ACL: 'public-read',
@@ -154,39 +156,48 @@ const getCertificates = async (req, res, next) => {
     ContentType: 'image/jpeg'
   };
   await s3Bucket.upload(data, async function(err, data){
-      if (err) { 
-        console.log(err);
-        console.log('Error uploading data: ', data); 
-      } else {
+
         console.log('succesfully uploaded the image!',data.Location);
-        if(req.body.templateNumber==1){
-        html.push(htmlTemplates.TEMPLATE_1(users[i],data.Location))
-        }
-        else{
-          html.push(htmlTemplates.TEMPLATE_2(users[i],data.Location))
-        }
-        const filename = 'gg' + Date.now()
-        await pdf.create(html[i], { timeout: '100000' }).toStream(async function(err, stream) {
-          if (err) return console.log(err)
-          if(i==users.length-1){
-         await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, data.Location)
-          }
-          else{
-          await   uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, data.Location)
-          }
-    
-        });
-      }
-  });
+        
+         // });
+    // await fs.writeFile("out.png", base64Data, 'base64', function(err) {
+    //   console.log(err);
     // });
 
     
    
-  }
+  }).promise().then(async ()=>{
+    if(req.body.templateNumber == 1){
+      console.log('html  ', i)
+    await  html.push(await htmlTemplates.TEMPLATE_1(users[i],data.Location,users[i].link))
+    }
+    else if(req.body.templateNumber == 2) {
+      console.log('html  ', i)
+      html.push(await htmlTemplates.TEMPLATE_2(users[i],data.Location,users[i].link))
+    }
+    else{
+      console.log('html  ', i)
+      html.push(htmlTemplates.TEMPLATE_3(users[i],data.Location))
+    }
+    const filename = 'gg' + Date.now()
+    await pdf.create(html[i], { height:"375px", width:"620px", timeout: '100000' }).toStream(async function(err, stream) {
+      if (err) return console.log(err)
+      if(i==users.length-1){
+     await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK, auth_params)
+      }
+      else{
+      await   uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, QRCodeLINK ,auth_params)
+      }
+
+    });
+  
+
+  })
+}
   console.log(users)
 }
 
-const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCodeLINK) => {
+const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCodeLINK ,auth_params) => {
   AWS.config.update({
     accessKeyId: process.env.AWS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS
@@ -264,10 +275,13 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCode
       });
     }
    await User.updateOne({email:email},{$push:{events:{event_id:event_id,certificate_link:data.Location}}}).then(async()=>{
+     await Event.updateOne({_id: event_id},{$push:{participants:{participant_name: name, participant_email: email, certificate_link: data.Location}}})
     const certificate= new Certificate({
       _id:new mongoose.Types.ObjectId(),
        certificate_link: data.Location,
        auth_link: QRCodeLINK,
+       auth_params: auth_params,
+       event_id: event_id,
        user_name: name,
        user_email: email,
      })

@@ -8,7 +8,7 @@ function Sidebar({ name, openDash, setOpenDash, setLoggedIn }) {
 	const handleClick = (event) => {
 		let newDash = event.target.id;
 		if (newDash !== openDash) {
-			setOpenDash(newDash);
+			setOpenDash(Number(newDash));
 		}
 	};
 

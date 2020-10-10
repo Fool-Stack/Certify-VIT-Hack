@@ -12,35 +12,29 @@
             margin: 0;
             padding: 0;
             background-image: url('https://i.ibb.co/V3wy1pf/bg2.png');
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             font-family: 'Montserrat', sans-serif;
             position: absolute;
+        }
+        #container div {
+            position: absolute;
+            width: 100%;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
     <div id="container">
-        <div style="font-size: 55px;font-weight: 600;margin-bottom: 16px;">Certificate of Completion</div>
-        <div style="font-size: 40px;">This is to certify that</div>
-        <div style="font-size: 38px;font-weight: 600;margin: 16px 0;font-style: oblique;">${Vinayak Gupta}</div>
-        <div style="font-size: 38px;">has completed the course</div>
-        <div style="font-size: 36px;font-weight: 600;margin: 12px 0;font-style: oblique;">${Certify}</div>
-        <div style="font-size: 38px;">with a score of <span style="font-weight: 600;">${Score}</span></div>
-        <div style="font-size: 36px;font-weight: 600;margin: 8px 0;font-style: oblique;">Dated: ${Date}</div>
-        <div style="position: absolute; bottom: 40px; left: 40px;"><img src="../out.png"></div>
-        <div style="position: absolute; top: 30px; right: 50px; background-color: #ffffff88;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="160px"></div>
+        <div style="font-size: 55px;font-weight: 600;top: 68px;">Certificate of Completion</div>
+        <div style="top: 140px; font-size: 38px;">This is to certify that</div>
+        <div style="font-size: 38px; font-weight: 600;margin: 16px 0;font-style: oblique;top: 180px;">${Vinayak Gupta}</div>
+        <div style="font-size: 38px; top: 260px;">has completed the course</div>
+        <div style="font-size: 36px; font-weight: 600;margin: 12px 0;font-style: oblique;top: 310px;">${Certify}</div>
+        <div style="font-size: 38px; top: 380px;">with a score of <span style="font-weight: 600;">${Score}</span></div>
+        <div style="font-size: 36px;font-weight: 600;margin: 8px 0;font-style: oblique;top: 440px;">Dated: ${Date}</div>
+        <div style="bottom: 40px;right: 40px;width: fit-content; text-align: right;"><img src="${qr}" style="width: 148px; height: 148px;"></div>
+        <div style="bottom: 18px;right: 18px; font-size: 14px;width: fit-content;"><a href="${link}" style="font-weight: 600;">${link}</div>
+        <div style="top: 30px;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" style="width: 160px; margin-left: -25px;"></div>
     </div>
 </body>
-<!-- <script src="../node_modules/qrcode/build/qrcode.min.js"></script>
-<script>
-    QRCode.toCanvas(document.getElementById('canvas'), 'https://jugaldb.com', function (error) {
-        if (error) console.error(error)
-        console.log('success!');
-    })
-</script> -->
-
 </html>
