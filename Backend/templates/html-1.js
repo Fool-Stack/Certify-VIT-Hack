@@ -15,10 +15,6 @@ const templates = {
             margin: 0;
             padding: 0;
             background-image: url('https://i.ibb.co/s1kjBtj/bg1.png');
-            /* display: flex; */
-            /* flex-direction: column; */
-            align-items: center;
-            justify-content: center;
             font-family: 'Montserrat', sans-serif;
             position: absolute;
         }
@@ -39,13 +35,10 @@ const templates = {
         <div style="font-size: 36px;font-weight: 600;margin: 12px 0;font-style: oblique;top: 310px;">${userData.event}</div>
         <div style="font-size: 38px;top: 380px;">with a score of <span style="font-weight: 600;">${userData.score}</span></div>
         <div style="font-size: 36px;font-weight: 600;margin: 8px 0;font-style: oblique;top: 440px;">Dated: ${userData.date}</div>
-        <div style="bottom: 40px;left: 40px;width: fit-content;"><canvas id="canvas" height="132" width="132" style="height: 132px; width: 132px;"></canvas></div>
+        <div style="bottom: 40px;right: 40px; text-align:right;"><img src="${qr}" style="width: 148px; height: 148px;"></div>
         <div style="top: 30px;left: 50px;background-color: #ffffff88;width: fit-content;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="160px"></div>
-        <div><img src = ${qr}></div>
-        </div>
+    </div>
 </body>
-
-
 </html>
     `
   }

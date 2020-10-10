@@ -159,7 +159,12 @@ const getCertificates = async (req, res, next) => {
         console.log('Error uploading data: ', data); 
       } else {
         console.log('succesfully uploaded the image!',data.Location);
+        if(req.body.templateNumber==1){
         html.push(htmlTemplates.TEMPLATE_1(users[i],data.Location))
+        }
+        else{
+          html.push(htmlTemplates.TEMPLATE_2(users[i],data.Location))
+        }
         const filename = 'gg' + Date.now()
         await pdf.create(html[i], { timeout: '100000' }).toStream(async function(err, stream) {
           if (err) return console.log(err)
@@ -173,8 +178,6 @@ const getCertificates = async (req, res, next) => {
         });
       }
   });
-    // await fs.writeFile("out.png", base64Data, 'base64', function(err) {
-    //   console.log(err);
     // });
 
     
@@ -269,7 +272,7 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCode
        user_email: email,
      })
      await certificate.save()
-      console.log(certificate)
+      //console.log(certificate)
       if(isLast){
          return res.status(200).json({
             message : "chintu koding"
