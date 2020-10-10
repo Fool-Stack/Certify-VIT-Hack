@@ -177,7 +177,7 @@ const getCertificates = async (req, res, next) => {
       html.push(await htmlTemplates.TEMPLATE_2(users[i],data.Location,users[i].link))
     }
     const filename = 'gg' + Date.now()
-    await pdf.create(html[i], { height:"375px", width:"620px", timeout: '100000' }).toStream(async function(err, stream) {
+    await pdf.create(html[i], { height:"750px", width:"1240px", timeout: '100000' }).toStream(async function(err, stream) {
       if (err) return console.log(err)
       if(i==users.length-1){
      await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK, auth_params)
