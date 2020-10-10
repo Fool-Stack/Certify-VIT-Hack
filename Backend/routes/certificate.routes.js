@@ -5,6 +5,6 @@ const certificateControllers = require('../controllers/certificate.controller')
 const router = express.Router();
 const upload = multer({ dest: './data' });
 
-router.get('/add', checkAuth, certificateControllers.viewCertificateDetailsFromQrCode);
+router.post('/verify', certificateControllers.viewCertificateDetailsFromQrCode);
 
 module.exports = router
