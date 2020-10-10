@@ -132,47 +132,44 @@ const getCertificates = async (req, res, next) => {
   console.log(users)
   for(let i = 0; i < users.length; i++){
     const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + shortid.generate()
-    users[i].link = await qrcode.toDataURL(QRCodeLINK)
-    console.log(QRCodeLINK)
-   // var base64Data = users[i].link.replace(/^data:image\/png;base64,/, "");
-    buff = Buffer.from(users[i].link.replace(/^data:image\/\w+;base64,/, ""),'base64')
+  //   users[i].link = await qrcode.toDataURL(QRCodeLINK)
+  //   console.log(QRCodeLINK)
+  //  // var base64Data = users[i].link.replace(/^data:image\/png;base64,/, "");
+  //   buff = Buffer.from(users[i].link.replace(/^data:image\/\w+;base64,/, ""),'base64')
    
-  var params = {
-    ACL: 'public-read',
-    Bucket: process.env.AWS_S3_BUCKET,
-    Key: users[i].name +'.jpeg'
-  };
-  //  var params = {
+  // var params = {
+  //   ACL: 'public-read',
+  //   Bucket: process.env.AWS_S3_BUCKET,
+  //   Key: users[i].name +'.jpeg'
+  // };
+  // //  var params = {
   //   ACL: 'public-read',
   //   Bucket: process.env.AWS_S3_BUCKET,
   //   KEY: 'qr'
   // };
-  var s3Bucket = new AWS.S3( { params} );
-  var data = { 
-    Body: buff,
-    ContentEncoding: 'base64',
-    ContentType: 'image/jpeg'
-  };
-  await s3Bucket.upload(data, async function(err, data){
-      if (err) { 
-        console.log(err);
-        console.log('Error uploading data: ', data); 
-      } else {
-        console.log('succesfully uploaded the image!',data.Location);
-        html.push(htmlTemplates.TEMPLATE_1(users[i],data.Location))
+  // var s3Bucket = new AWS.S3( { params} );
+  // var data = { 
+  //   Body: buff,
+  //   ContentEncoding: 'base64',
+  //   ContentType: 'image/jpeg'
+  // };
+  // await s3Bucket.upload(data, async function(err, data){
+
+        // console.log('succesfully uploaded the image!',data.Location);
+        html.push(htmlTemplates.TEMPLATE_1(users[i]))
         const filename = 'gg' + Date.now()
         await pdf.create(html[i], { timeout: '100000' }).toStream(async function(err, stream) {
           if (err) return console.log(err)
           if(i==users.length-1){
-         await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, data.Location)
+         await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK)
           }
           else{
-          await   uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, data.Location)
+          await   uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, QRCodeLINK)
           }
     
         });
-      }
-  });
+      
+  // });
     // await fs.writeFile("out.png", base64Data, 'base64', function(err) {
     //   console.log(err);
     // });
