@@ -133,10 +133,10 @@ const getCertificates = async (req, res) => {
     pdf.create(html[i], {}).toStream(function(err, stream) {
       if (err) return console.log(err)
       if(i==users.length-1){
-      uploadToS3(res,stream, filename,users[i].email,event_id,true)
+      uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name)
       }
       else{
-        uploadToS3(res,stream, filename,users[i].email,event_id,false)
+        uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name)
       }
 
     });
@@ -144,7 +144,7 @@ const getCertificates = async (req, res) => {
   console.log(users)
 }
 
-const uploadToS3 = async (res,body, filename,email,event_id,isLast) => {
+const uploadToS3 = async (res,body, filename,email,event_id,isLast, name) => {
   AWS.config.update({
     accessKeyId: process.env.AWS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS
@@ -160,6 +160,67 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast) => {
   };
   await s3.upload(params, async function(err, data) {
     console.log(err, data);
+    const user = await User.findOne({email})
+    if(!user){
+      bcrypt.hash(email, 10, (err, hash) => {
+        if (err) {
+          return res.status(500).json({
+            error: err,
+          });
+        } else {
+          const user = new User({
+            _id: new mongoose.Types.ObjectId(),
+            email: email,
+            password: hash,
+            name: name,
+            isEmailVerified: true,
+          });
+          user
+            .save()
+            .then(async (result) => {
+                  const msg = {
+                    to: result.email,
+                    from: process.env.sendgridEmail,
+                    subject: "Certify: Certificate Generation",
+                    text: " ",
+                    html: emailTemplates.VERIFY_EMAIL(result1),//////change email
+                  };
+                  sgMail
+                    .send(msg)
+                    .then((result) => {
+                      console.log("Email sent");
+                    })
+                    .catch((err) => {
+                      console.log(err)
+                      res.status(500).json({
+                        message: err.toString()
+                      })
+                    });
+                    console.log(`User created ${result}`)
+                    res.status(201).json({
+                      userDetails: {
+                        userId: result._id,
+                        email: result.email,
+                        name: result.name,
+                        mobileNumber: result.mobileNumber,
+                      },
+                    })
+                .catch((err) => {
+                  console.log(err)
+                  res.status(400).json({
+                    message: err.toString()
+                  })
+                });
+            })
+            .catch((err) => {
+              console.log(err)
+              res.status(500).json({
+                message: err.toString()
+              })
+            });
+        }
+      });
+    }
    await User.updateOne({email:email},{$push:{events:{event_id:event_id,certificate_link:data.Location}}}).then(()=>{
       console.log("lolgg")
       if(isLast){
