@@ -2,7 +2,7 @@ import React from "react";
 import ActionButton from "../ActionButton/ActionButton";
 import "./EventItem.css";
 
-function EventItem({ info }) {
+function EventItem({ info, admin, link }) {
 	return (
 		<div className="event-item">
 			<div className="event-detail">
@@ -18,7 +18,25 @@ function EventItem({ info }) {
 				</div>
 			</div>
 			<div className="event-btn-section">
-				<ActionButton className="event-btn">View Event</ActionButton>
+				{admin ? (
+					<ActionButton className="event-btn">
+						View Event
+					</ActionButton>
+				) : (
+					<ActionButton
+						className="event-btn"
+						download={true}
+						link={link}
+					>
+						<span
+							style={{
+								fontSize: "0.8rem",
+							}}
+						>
+							Download Certificate
+						</span>
+					</ActionButton>
+				)}
 			</div>
 		</div>
 	);

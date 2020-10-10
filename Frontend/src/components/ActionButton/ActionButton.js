@@ -9,6 +9,8 @@ function ActionButton(props) {
 			className={`${props.className} action-btn`}
 			onClick={props.onClick}
 			disabled={props.disabled}
+			download={props.download}
+			href={props.link}
 		>
 			{props.children}
 		</Button>
