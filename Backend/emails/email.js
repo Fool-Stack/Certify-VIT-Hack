@@ -315,7 +315,7 @@ const emails = {
                                     style="line-height: 1.5; text-align: center; word-break: break-word; font-family: 'Source Sans Pro', Tahoma, Verdana, Segoe, sans-serif; font-size: 14px; mso-line-height-alt: 21px; margin: 0;">
                                     <span
                                         style="font-size: 14px; background: #EEEEEE; font-weight:200;font-size:1.5rem;padding:5px 10px; text-align: center">
-                                        ${userData.passResetKey}
+                                        ${userData.pass_reset_key}
                                         </em></span></p>
                                         <br>
                                         <br>
