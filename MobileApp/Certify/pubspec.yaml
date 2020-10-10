@@ -47,6 +47,8 @@ dev_dependencies:
 flutter:
 
   assets:
+    - assets/images/cert1.png
+    - assets/images/cert2.png
     - assets/svg/certify.svg
     - google_fonts/Montserrat-Medium.ttf
     - google_fonts/Montserrat-Bold.ttf
