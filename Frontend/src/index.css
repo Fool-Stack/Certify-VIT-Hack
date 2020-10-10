@@ -6,7 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #1f1f1f;
   color: white;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 code {

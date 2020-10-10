@@ -1,0 +1,57 @@
+.event-page-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.quiz-name-detail {
+	font-size: 3rem;
+	font-weight: 900;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: #5757ff;
+}
+
+.quiz-date-detail {
+	margin-top: 0;
+	font-weight: 700;
+}
+
+.certs-generated {
+	font-size: 3.5rem;
+	font-weight: 700;
+	color: #5757ff;
+	text-align: center;
+}
+
+.add-participants-modal {
+	padding: 5%;
+}
+
+.divider-1 {
+	width: 100% !important;
+	color: white !important;
+	background-color: white !important;
+	margin-top: 2% !important;
+	margin-bottom: 2% !important;
+}
+
+.dropzone {
+	background-color: rgb(70, 70, 70);
+	padding: 3%;
+	padding-top: 5%;
+	text-align: center;
+	margin: 0 5%;
+	margin-bottom: 3%;
+	border-radius: 5px;
+}
+
+.drop-icon {
+	color: rgb(110, 110, 110) !important;
+	font-size: 7rem !important;
+}
+
+.add-participants-btn {
+	margin-top: 10%;
+	text-align: center;
+}
