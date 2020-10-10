@@ -6,12 +6,10 @@ const Event = require('./event');
 const userSchema = mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
 	user_type: { type: String, default: "User" },
-  name: { type: String, required: true },
+  name: { type: String,},
   google_id: { type: Number },
 	email: {
 		type: String,
-		required: true,
-		match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
   },
   events: [{
     event_id: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
