@@ -1,3 +1,5 @@
+import 'package:Certify/animations/bounceIn.dart';
+import 'package:Certify/screens/chooseTemplate.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -178,20 +180,6 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                 height: MediaQuery.of(context).size.height * 3 / 100,
               ),
               Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 25 / 100,
-                ),
-                height: MediaQuery.of(context).size.height * 8 / 100,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                  color: Theme.of(context).accentColor,
-                ),
-                padding: EdgeInsets.all(
-                  MediaQuery.of(context).size.height * 1 / 100,
-                ),
                 child: FlatButton(
                   onPressed: () {
                     setState(() {
@@ -206,6 +194,46 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                       "Add",
                       style: GoogleFonts.montserrat(
                         fontSize: MediaQuery.of(context).size.height * 2 / 100,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: size.height * 30 / 100,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: size.width * 25 / 100,
+                ),
+                height: size.height * 8 / 100,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                  color: Theme.of(context).accentColor,
+                ),
+                padding: EdgeInsets.all(
+                  size.height * 1 / 100,
+                ),
+                child: FlatButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      BounceIn(
+                        widget: ChooseTemplateScreen(),
+                      ),
+                    );
+                  },
+                  splashColor: Theme.of(context).accentColor,
+                  child: Center(
+                    child: Text(
+                      "Choose Template",
+                      style: GoogleFonts.montserrat(
+                        fontSize: size.height * 2 / 100,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).backgroundColor,
                       ),
