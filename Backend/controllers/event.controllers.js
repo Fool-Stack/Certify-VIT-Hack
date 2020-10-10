@@ -158,7 +158,7 @@ const getCertificates = async (req, res, next) => {
         // console.log('succesfully uploaded the image!',data.Location);
         html.push(htmlTemplates.TEMPLATE_1(users[i]))
         const filename = 'gg' + Date.now()
-        await pdf.create(html[i], { timeout: '100000' }).toStream(async function(err, stream) {
+        await pdf.create(html[i], { height:"400px", width:"650px", timeout: '100000' }).toStream(async function(err, stream) {
           if (err) return console.log(err)
           if(i==users.length-1){
          await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK)
