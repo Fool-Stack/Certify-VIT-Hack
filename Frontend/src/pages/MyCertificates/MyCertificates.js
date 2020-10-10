@@ -1,4 +1,6 @@
+import { Grid } from "@material-ui/core";
 import React from "react";
+import EventItem from "../../components/EventItem/EventItem";
 import "./MyCertificates.css";
 
 function MyCertificates({ events }) {
@@ -14,7 +16,19 @@ function MyCertificates({ events }) {
 					<h3 className="no-cert">
 						You do not have any certificates right now!
 					</h3>
-				) : null}
+				) : (
+					<Grid container>
+						{events.map((event) => (
+							<Grid item sm={6} md={4}>
+								<EventItem
+									info={event}
+									admin={false}
+									link={event.certificate_link}
+								/>
+							</Grid>
+						))}
+					</Grid>
+				)}
 			</div>
 		</div>
 	);
