@@ -1,15 +1,21 @@
 import {
-    Container, Typography, Button, InputAdornment, IconButton
+	Container,
+	Typography,
+	Button,
+	InputAdornment,
+	IconButton,
+	Divider,
 } from "@material-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "../../components/TextInput/TextInput";
 import Navbar from "../../components/Navbar/Navbar";
 import "./LoginPage.css";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import ActionButton from "../../components/ActionButton/ActionButton";
 
 function LoginPage() {
-    const [email, changeEmail] = useState("");
+	const [email, changeEmail] = useState("");
 	const [emailError, setEmailError] = useState("");
 	const [emailChanged, setEmailChanged] = useState(false);
 	const [password, changePassword] = useState("");
@@ -52,36 +58,34 @@ function LoginPage() {
 		if (event.key === "Enter") {
 			handleSubmit();
 		}
-    };
-    
-    const handleSubmit = () => {
+	};
 
-    }
+	const handleSubmit = () => {};
 
-    return (
-        <>
-            <Navbar />
-            <Container className="login-page">
-                <Typography variant="h3" color="primary" className="login-head">
-                    Login
-                </Typography>
-                <br />
-                <form className="form">
-                    <TextInput
-                        id="email"
-                        label="Email"
-                        type="email"
-                        className="form-input"
-                        variant="outlined"
-                    ></TextInput>
-                    <br />
-                    <TextInput
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        label="Password"
-                        className="form-input"
-                        variant="outlined"
-                        value={password}
+	return (
+		<>
+			<Navbar />
+			<Container className="login-page">
+				<Typography variant="h3" color="primary" className="login-head">
+					LOGIN
+				</Typography>
+				<form className="form">
+					<TextInput
+						id="email"
+						label="Email"
+						type="email"
+						className="form-input"
+						variant="outlined"
+						value={email}
+					></TextInput>
+					<br />
+					<TextInput
+						id="password"
+						type={showPassword ? "text" : "password"}
+						label="Password"
+						className="form-input"
+						variant="outlined"
+						value={password}
 						onChange={handlePasswordChange}
 						onKeyPress={keyPress}
 						InputProps={{
@@ -91,6 +95,7 @@ function LoginPage() {
 										aria-label="show password"
 										onClick={togglePasswordVisibility}
 										edge="end"
+										className="view-pass-icon"
 									>
 										{showPassword ? (
 											<Visibility />
@@ -101,20 +106,28 @@ function LoginPage() {
 								</InputAdornment>
 							),
 						}}
-                    ></TextInput>
-                </form>
-                <Button className="login-btn">
-                    Login
-				    </Button>
-                <Typography variant="h6" color="primary">
-                    --- OR ---
-                    </Typography>
-                <Link to={`/register`}><Button className="login-btn-outline">
-                    Register
-				    </Button></Link>
-            </Container>
-        </>
-    );
+					></TextInput>
+				</form>
+				<br />
+				<div className="login-btn-div">
+					<ActionButton className="login-btn">LOGIN</ActionButton>
+					<Typography
+						variant="h6"
+						color="primary"
+						className="btn-seperator"
+					>
+						--- OR ---
+					</Typography>
+
+					<Link to={`/register`}>
+						<ActionButton className="transparent-variant">
+							Register
+						</ActionButton>
+					</Link>
+				</div>
+			</Container>
+		</>
+	);
 }
 
 export default LoginPage;

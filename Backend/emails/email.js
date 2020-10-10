@@ -203,7 +203,7 @@ const emails = {
                                       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
                                         <tbody>
                                           <tr>
-                                            <td style="width:149px;"> <img alt="CodeChef VIT" height="auto" src="https://codechefvit.com/assets/images/logos/ccwhite.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="149" /> </td>
+                                            <td style="width:149px;"> <img alt="Certify" height="auto" src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="149" /> </td>
                                           </tr>
                                         </tbody>
                                       </table>
@@ -315,7 +315,7 @@ const emails = {
                                     style="line-height: 1.5; text-align: center; word-break: break-word; font-family: 'Source Sans Pro', Tahoma, Verdana, Segoe, sans-serif; font-size: 14px; mso-line-height-alt: 21px; margin: 0;">
                                     <span
                                         style="font-size: 14px; background: #EEEEEE; font-weight:200;font-size:1.5rem;padding:5px 10px; text-align: center">
-                                        ${userData.passResetKey}
+                                        ${userData.pass_reset_key}
                                         </em></span></p>
                                         <br>
                                         <br>
@@ -403,7 +403,7 @@ const emails = {
                                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                                   <tr>
                                     <td align="center" style="font-size:0px;padding:10px;word-break:break-word;">
-                                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:center;color:white;">Made with ❤️ by CodeChef-VIT</div>
+                                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:center;color:white;">Made with ❤️ by Certify Team</div>
                                     </td>
                                   </tr>
                                   <tr>

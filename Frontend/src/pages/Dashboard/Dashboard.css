@@ -7,5 +7,9 @@
 }
 
 .dash-drawer .MuiDrawer-paper {
-	width: 200px !important;
+	width: 256px !important;
+	background-color: #111111 !important;
+	color: white !important;
 }
+
+.dash-drawer {}

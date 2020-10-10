@@ -252,10 +252,134 @@ const seeAllEvents = async (req, res) => {
   }
 }
 
+const forgotPassword = async (req, res) => {
+  var email = req.body.email;
+	User.findOne({ email: email }, (err, userData) => {
+		if (!err && userData != null) {
+			userData.pass_reset_key = shortid.generate();
+
+			userData.pass_key_expires = new Date().getTime() + 20 * 60 * 1000; // pass reset key only valid for 20 minutes
+			userData.save().then((x) => {
+				const html = emailTemplates.FORGOT_PASSWORD(x);
+			//	console.log(html);
+				if (!err) {
+					const msg = {
+						to: email,
+						from: process.env.sendgridEmail,
+						subject: "Quizzie: Password Reset Request",
+						text: " ",
+						html: html,
+					};
+
+					sgMail
+						.send(msg)
+						.then((result) => {
+							res.status(200).json({
+								message: "Password reset key sent to email",
+							});
+						})
+						.catch((err) => {
+							res.status(500).json({
+								// message: "something went wrong1",
+								error: err.toString(),
+							});
+						});
+				}
+			});
+		} else {
+			res.status(400).send("email is incorrect");
+		}
+	});
+}
+
+const resetPassword = async (req, res) => {
+  let resetKey = req.body.resetKey;
+	let newPassword = req.body.newPassword;
+
+	await User.findOne({ passResetKey: resetKey })
+		.then(async (result) => {
+			if (Date.now() > result.passKeyExpires) {
+				res.status(401).json({
+					message: "Pass key expired",
+				});
+			}
+			result.password = bcrypt.hashSync(newPassword, 10);
+			result.pass_reset_key = null;
+			result.pass_key_expires = null;
+			await result
+				.save()
+				.then((result1) => {
+					res.status(200).json({
+						message: "Password updated",
+					});
+				})
+				.catch((err) => {
+					res.status(403).json({
+						message: "Unusual error",
+						err: err.toString(),
+					});
+				});
+		})
+		.catch((err) => {
+			res.status(400).json({
+				message: "Invalid pass key",
+			});
+		});
+}
+
+const changePassword = async (req, res) => {
+  await User.findOne({ _id: req.user.userId })
+  .then(async (result) => {
+    bcrypt.compare(req.body.password, result.password, (err, result1) => {
+      if (err) {
+        return res.status(401).json({
+          message: "Auth failed",
+        });
+      }
+      if (result1) {
+        bcrypt.hash(req.body.newPassword, 10, (err, hash) => {
+          if (err) {
+            res.status(400).json({
+              err,
+            });
+          }
+          User.updateOne(
+            { _id: req.user.userId },
+            { $set: { password: hash } }
+          )
+            .then((result) => {
+              res.status(200).json({
+                message: "Password changed",
+              });
+            })
+            .catch((err) => {
+              res.status(400).json({
+                message: "error",
+                error: err.toString(),
+              });
+            });
+        });
+      } else {
+        return res.status(401).json({
+          message: "Auth failed",
+        });
+      }
+    });
+  })
+  .catch((err) => {
+    res.status(400).json({
+      error: err.toString(),
+    });
+  });
+}
+
 module.exports = {
   userRegister,
   userLogin,
   verifyEmail,
   resendVerifyMail,
   seeAllEvents,
+  resetPassword,
+  forgotPassword,
+  changePassword,
 }
