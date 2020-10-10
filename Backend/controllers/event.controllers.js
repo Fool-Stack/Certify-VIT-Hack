@@ -16,7 +16,7 @@ var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 sgMail.setApiKey(process.env.SendgridAPIKey);
 
-const addEvent = async (req , res)=>{
+const addEvent = async (req , res, next)=>{
   if(req.body.secret==null){
     return res.status(403).json({
       message: "Only admins can create an event"
@@ -56,7 +56,7 @@ const addEvent = async (req , res)=>{
       }
 }
 
-const deleteEvent = async(req, res) => {
+const deleteEvent = async(req, res, next) => {
   const { event_id } = req.body
   await Event.deleteOne({_id: event_id})
   .then((result)=>{
@@ -72,7 +72,7 @@ const deleteEvent = async(req, res) => {
   })
 }
 
-const getEventByID = async (req, res) => {
+const getEventByID = async (req, res, next) => {
   const event_id = req.params.id
   const event = await Event.findById(event_id)
   if(event){
@@ -89,7 +89,7 @@ const getEventByID = async (req, res) => {
   }
 }
 
-const updateEvent = async(req, res) => {
+const updateEvent = async(req, res, next) => {
   await Event.updateOne({ _id: req.body._id }, req.body).then((result)=>{
     console.log(req.body)
     return res.status(200).json({
@@ -117,7 +117,7 @@ const updateEvent = async(req, res) => {
 //   date: "10-10-2002"
 // })
 
-const getCertificates = async (req, res) => {
+const getCertificates = async (req, res, next) => {
   const html = [];
   const event_id = req.body.event_id
   const users = await csv().fromFile(req.file.path);

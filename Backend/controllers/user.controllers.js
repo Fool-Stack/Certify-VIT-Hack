@@ -10,7 +10,7 @@ const emailTemplates = require('../emails/email');
 
 sgMail.setApiKey(process.env.SendgridAPIKey);
 
-const userRegister = (req, res) => {
+const userRegister = (req, res, next) => {
 	User.find({ email: req.body.email })
 		.exec()
 		.then((user) => {
@@ -95,7 +95,7 @@ const userRegister = (req, res) => {
 }
 
 
-const userLogin = (req, res) => {
+const userLogin = (req, res, next) => {
 	User.find({ email: req.body.email })
 		.exec()
 		.then((user) => {
@@ -159,7 +159,7 @@ const userLogin = (req, res) => {
 }
 
 
-const verifyEmail = async (req, res) => {
+const verifyEmail = async (req, res, next) => {
   const { verification_key } = req.body;
 	await User.findOne({ verification_key })
 		.then(async (user) => {
@@ -193,7 +193,7 @@ const verifyEmail = async (req, res) => {
     });
 }
 
-const resendVerifyMail = async (req, res) => {
+const resendVerifyMail = async (req, res, next) => {
   const { email } = req.body;
 	const user = await User.findOne({ email });
 	if (user) {
@@ -236,7 +236,7 @@ const resendVerifyMail = async (req, res) => {
 	}
 }
 
-const seeAllEvents = async (req, res) => {
+const seeAllEvents = async (req, res, next) => {
   const _id = req.user.userId
   const user = await User.findById( _id )
   if(user){
@@ -252,7 +252,7 @@ const seeAllEvents = async (req, res) => {
   }
 }
 
-const forgotPassword = async (req, res) => {
+const forgotPassword = async (req, res, next) => {
   var email = req.body.email;
 	User.findOne({ email: email }, (err, userData) => {
 		if (!err && userData != null) {
@@ -292,7 +292,7 @@ const forgotPassword = async (req, res) => {
 	});
 }
 
-const resetPassword = async (req, res) => {
+const resetPassword = async (req, res, next) => {
   let resetKey = req.body.resetKey;
 	let newPassword = req.body.newPassword;
 
@@ -327,7 +327,7 @@ const resetPassword = async (req, res) => {
 		});
 }
 
-const changePassword = async (req, res) => {
+const changePassword = async (req, res, next) => {
   await User.findOne({ _id: req.user.userId })
   .then(async (result) => {
     bcrypt.compare(req.body.password, result.password, (err, result1) => {
