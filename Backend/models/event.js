@@ -8,7 +8,8 @@ const eventSchema = mongoose.Schema({
     admin_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
   }],
   participants: [{
-    participant_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    participant_email: { type: String, },
+    participant_name: { type: String},
     certificate_link: { type: String }
   }],
   created_by :{ type: mongoose.Schema.Types.ObjectId, ref: "User" },
