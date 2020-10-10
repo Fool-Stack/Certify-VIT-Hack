@@ -12,6 +12,7 @@ const Event = require('../models/event');
 const Certificate = require('../models/certificate')
 const emailTemplates=require('../emails/email')
 const htmlTemplates = require('../templates/html-1');
+var qrcode = require('qrcode')
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 sgMail.setApiKey(process.env.SendgridAPIKey);
@@ -125,12 +126,18 @@ const getCertificates = async (req, res, next) => {
   console.log(users)
   for(let i = 0; i < users.length; i++){
     const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + shortid.generate()
+    users[i].link = await qrcode.toDataURL(QRCodeLINK)
+    var base64Data = users[i].link.replace(/^data:image\/png;base64,/, "");
+    await fs.writeFile("out.png", base64Data, 'base64', function(err) {
+      console.log(err);
+    });
     html.push(htmlTemplates.TEMPLATE_1(users[i]))
+    console.log(html)
   
   console.log('html DOne')
     
      const filename = 'gg' + Date.now()
-    pdf.create(html[i], {}).toStream(function(err, stream) {
+    pdf.create(html[i], { timeout: '100000' }).toStream(function(err, stream) {
       if (err) return console.log(err)
       if(i==users.length-1){
       uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK)
