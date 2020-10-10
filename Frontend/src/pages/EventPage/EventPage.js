@@ -180,8 +180,7 @@ function EventPage(props) {
 											}}
 										>	
 										{file? `Selected file: ${file.name}`
-										:
-											"Drag 'n' drop or click to select a CSV file"
+										: "Drag 'n' drop or click to select a CSV file"
 										}
 										</p>
 									</div>
