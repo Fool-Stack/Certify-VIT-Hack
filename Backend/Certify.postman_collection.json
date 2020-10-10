@@ -347,6 +347,352 @@
 							"body": "{\n    \"message\": \"Email verification key sent to email\"\n}"
 						}
 					]
+				},
+				{
+					"name": "View events of user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwNTRmNTY3MTBjMTRhMjBiYzQ0OTAiLCJlbWFpbCI6Imp1Z2FsYmhhdHQzQGdtYWlsLmNvbSIsIm5hbWUiOiJKdWdhbCBCaGF0dCIsImlhdCI6MTYwMjI1ODMyNiwiZXhwIjoxNjAyMzQ0NzI2fQ.SzX4kgur0zmCdt6uzt21c9I3InA0aQYe5R1fmxg2Djk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/events",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View events of user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwNTRmNTY3MTBjMTRhMjBiYzQ0OTAiLCJlbWFpbCI6Imp1Z2FsYmhhdHQzQGdtYWlsLmNvbSIsIm5hbWUiOiJKdWdhbCBCaGF0dCIsImlhdCI6MTYwMjI1ODMyNiwiZXhwIjoxNjAyMzQ0NzI2fQ.SzX4kgur0zmCdt6uzt21c9I3InA0aQYe5R1fmxg2Djk",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "215"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d7-ohf7caITn+glq8IvXyxf4rl1h+4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Oct 2020 15:46:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Events found\",\n    \"events\": [\n        {\n            \"_id\": \"5f80696d5392c8b278eac80f\",\n            \"event_id\": \"5f80696d5392c8b278eac80e\",\n            \"is_admin\": true\n        },\n        {\n            \"_id\": \"5f806a6935dbf391dcb16380\",\n            \"event_id\": \"5f806a6935dbf391dcb1637f\",\n            \"is_admin\": true\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"nousernameidea0709@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/forgotPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "forgot password",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"nousernameidea0709@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/forgotPassword",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"forgotPassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-ZtUok3+5d+TBO3Zo+9nj/975TuY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Oct 2020 05:53:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password reset key sent to email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passResetKey\":\"KW36taBr3\",\r\n    \"newPassword\":\"noob\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/resetPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"resetPassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Reset Password",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"passResetKey\":\"KW36taBr3\",\r\n    \"newPassword\":\"noob\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/resetPassword",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"resetPassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e-lakmr+DKqfX/l24uCPnpB/kr9GQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Oct 2020 05:56:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password updated\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgxMzZhYjg4OGRmOWFmMjg0ZjVmOGEiLCJlbWFpbCI6Im5vdXNlcm5hbWVpZGVhMDcwOUBnbWFpbC5jb20iLCJuYW1lIjoianVnYWwiLCJpYXQiOjE2MDIzMDk1OTksImV4cCI6MTYwMjM5NTk5OX0.sQIJ5lV3TMRboYWl5VUskGYZ-onIjh8fPp1JK68UNUw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"nousernameidea0709@gmail.com\",\r\n    \"newPassword\":\"noob\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/changePassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Change password",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgxMzZhYjg4OGRmOWFmMjg0ZjVmOGEiLCJlbWFpbCI6Im5vdXNlcm5hbWVpZGVhMDcwOUBnbWFpbC5jb20iLCJuYW1lIjoianVnYWwiLCJpYXQiOjE2MDIzMDk1OTksImV4cCI6MTYwMjM5NTk5OX0.sQIJ5lV3TMRboYWl5VUskGYZ-onIjh8fPp1JK68UNUw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\":\"nousernameidea0709@gmail.com\",\r\n    \"newPassword\":\"noob\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/changePassword",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"changePassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e-tiSwSG7SS24JXxZHHFMPMOsoHRI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Oct 2020 06:01:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password changed\"\n}"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -448,6 +794,224 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"event\": {\n        \"_id\": \"5f806a6935dbf391dcb1637f\",\n        \"name\": \"suc\",\n        \"date\": \"2020-10-09T18:30:00.000Z\",\n        \"created_by\": \"5f8054f56710c14a20bc4490\",\n        \"admins\": [\n            {\n                \"_id\": \"5f8054f56710c14a20bc4490\"\n            }\n        ],\n        \"participants\": [],\n        \"__v\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get event by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"event_id\":\"5f80696d5392c8b278eac80f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/event/5f806a6935dbf391dcb1637f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event",
+								"5f806a6935dbf391dcb1637f"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get event by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"event_id\":\"5f80696d5392c8b278eac80f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/event/5f806a6935dbf391dcb1637f",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event",
+										"5f806a6935dbf391dcb1637f"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "227"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e3-ag8F6cBoffggraCDcsuzbo672PI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Oct 2020 15:56:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Event Found\",\n    \"event\": {\n        \"_id\": \"5f806a6935dbf391dcb1637f\",\n        \"name\": \"suc\",\n        \"date\": \"2020-10-09T18:30:00.000Z\",\n        \"created_by\": \"5f8054f56710c14a20bc4490\",\n        \"admins\": [\n            {\n                \"_id\": \"5f8054f56710c14a20bc4490\"\n            }\n        ],\n        \"participants\": [],\n        \"__v\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete event",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwNTRmNTY3MTBjMTRhMjBiYzQ0OTAiLCJlbWFpbCI6Imp1Z2FsYmhhdHQzQGdtYWlsLmNvbSIsIm5hbWUiOiJKdWdhbCBCaGF0dCIsImlhdCI6MTYwMjI1MDc0NCwiZXhwIjoxNjAyMzM3MTQ0fQ.EsUqbrwrlksd285f5Q2ajWMRWOqEJrml41LMntRvwt0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"event_id\":\"5f80696d5392c8b278eac80e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/event/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update event",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwNTRmNTY3MTBjMTRhMjBiYzQ0OTAiLCJlbWFpbCI6Imp1Z2FsYmhhdHQzQGdtYWlsLmNvbSIsIm5hbWUiOiJKdWdhbCBCaGF0dCIsImlhdCI6MTYwMjI1MDc0NCwiZXhwIjoxNjAyMzM3MTQ0fQ.EsUqbrwrlksd285f5Q2ajWMRWOqEJrml41LMntRvwt0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"5f806a6935dbf391dcb1637f\",\r\n    \"name\":\"DevSoc\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/event/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event",
+								"update"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "{{url}}/event/update",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwNTRmNTY3MTBjMTRhMjBiYzQ0OTAiLCJlbWFpbCI6Imp1Z2FsYmhhdHQzQGdtYWlsLmNvbSIsIm5hbWUiOiJKdWdhbCBCaGF0dCIsImlhdCI6MTYwMjI1MDc0NCwiZXhwIjoxNjAyMzM3MTQ0fQ.EsUqbrwrlksd285f5Q2ajWMRWOqEJrml41LMntRvwt0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_id\":\"5f806a6935dbf391dcb1637f\",\r\n    \"name\":\"DevSoc\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/event/update",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event",
+										"update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-4xufhb5urQhor4jud2xVJr7Qvuo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Oct 2020 16:06:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Event Updated\"\n}"
 						}
 					]
 				}

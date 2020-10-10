@@ -261,7 +261,7 @@ const forgotPassword = async (req, res) => {
 			userData.pass_key_expires = new Date().getTime() + 20 * 60 * 1000; // pass reset key only valid for 20 minutes
 			userData.save().then((x) => {
 				const html = emailTemplates.FORGOT_PASSWORD(x);
-				console.log(html);
+			//	console.log(html);
 				if (!err) {
 					const msg = {
 						to: email,
