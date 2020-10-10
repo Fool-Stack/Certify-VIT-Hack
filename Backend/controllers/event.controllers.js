@@ -176,10 +176,6 @@ const getCertificates = async (req, res, next) => {
       console.log('html  ', i)
       html.push(await htmlTemplates.TEMPLATE_2(users[i],data.Location,users[i].link))
     }
-    else{
-      console.log('html  ', i)
-      html.push(htmlTemplates.TEMPLATE_3(users[i],data.Location))
-    }
     const filename = 'gg' + Date.now()
     await pdf.create(html[i], { height:"375px", width:"620px", timeout: '100000' }).toStream(async function(err, stream) {
       if (err) return console.log(err)
