@@ -8,6 +8,7 @@ function ActionButton(props) {
 			variant="contained"
 			className={`${props.className} action-btn`}
 			onClick={props.onClick}
+			disabled={props.disabled}
 		>
 			{props.children}
 		</Button>

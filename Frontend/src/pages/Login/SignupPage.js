@@ -85,6 +85,7 @@ function SignupPage() {
 			});
 		} catch (error) {
 			setLoading(false);
+			changePassword("");
 			console.log(error);
 		}
 	};
@@ -150,7 +151,11 @@ function SignupPage() {
 					></TextInput>
 				</form>
 				<div className="login-btn-div">
-					<ActionButton className="login-btn" onClick={handleSubmit}>
+					<ActionButton
+						className="login-btn"
+						onClick={handleSubmit}
+						disabled={isLoading ? true : false}
+					>
 						{!isLoading ? (
 							"REGISTER"
 						) : (
