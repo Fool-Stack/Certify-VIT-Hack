@@ -12,31 +12,33 @@
             margin: 0;
             padding: 0;
             background-image: url('https://i.ibb.co/3Nrr0z0/bg3.jpg');
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             font-family: 'Montserrat', sans-serif;
             position: absolute;
+            text-align: center;
+        }
+
+        #container div {
+            position: absolute;
+            width: 100%;
+            text-align: center;
         }
 
         #date-stamp {
             font-weight: 600;
-            margin: 30px 0 -50px 0;
-            padding: 10px;
+            margin: 30px 0 -50px 46%;
             font-style: oblique;
             background-color: #EA1B35;
-            width: 80px;
+            width: 100px !important;
             color: #1F2837;
-            height: 80px;
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            font-size: 22px;
+            font-size: 24px;
             transform: rotate(45deg);
             box-shadow: 2px 2px 1px #00000022;
         }
+
         #date-stamp div {
             transform: rotate(-45deg);
         }
@@ -45,26 +47,17 @@
 
 <body>
     <div id="container">
-        <div style="font-size: 50px;font-weight: 600;margin-bottom: 16px;">Certificate of Completion</div>
-        <div style="font-size: 25px;">This is to certify that</div>
-        <div
-            style="font-size: 38px;font-weight: 600;margin: 16px 0;font-style: oblique; color: #EA1B35; padding: 10px 30px; border-top: 3px solid #EA1B35; border-bottom: 3px solid #EA1B35;">
-            ${Vinayak Gupta}</div>
-        <div style="font-size: 25px;">has completed the course</div>
-        <div style="font-size: 36px;font-weight: 600;margin: 10px 0;font-style: oblique;">${Certify}</div>
-        <div style="font-size: 25px;">with a score of <span style="font-weight: 600;">${Score}</span></div>
-        <div id="date-stamp"><div>23 Sep 2020</div></div>
-        <div style="position: absolute; bottom: 40px; left: 40px;"><canvas id="canvas"></canvas></div>
-        <div style="position: absolute; top: 30px;"><img
-                src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="160px"></div>
+        <div style="font-size: 50px;font-weight: 600;top: 70px;">Certificate of Completion</div>
+        <div style="top: 150px;font-size: 25px;">This is to certify that</div>
+        <div style="font-size: 38px;font-weight: 600;margin: 16px 30%;font-style: oblique;color: #EA1B35;padding: 10px 30px;border-top: 3px solid #EA1B35;border-bottom: 3px solid #EA1B35;top: 180px;width: fit-content;/* margin: auto; */">${Vinayak Gupta}</div>
+        <div style="font-size: 25px;top: 280px;">has completed the course</div>
+        <div style="font-size: 36px;font-weight: 600;margin: 12px 0;font-style: oblique;top: 320px;">${Certify}</div>
+        <div style="font-size: 38px;top: 400px;">with a score of <span style="font-weight: 600;">${Score}</span></div>
+        <div id="date-stamp" style="top: 440px;"><div>23-09-2020</div></div>
+        <div style="bottom: 40px; right: 40px; width: fit-content;"><img src="${qr}" style="width: 148px; height: 148px;"></div>
+        <div style="top: 30px;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="160px">
+        </div>
     </div>
 </body>
-<script src="../node_modules/qrcode/build/qrcode.min.js"></script>
-<script>
-    QRCode.toCanvas(document.getElementById('canvas'), 'https://jugaldb.com', function (error) {
-        if (error) console.error(error)
-        console.log('success!');
-    })
-</script>
 
 </html>
