@@ -50,6 +50,7 @@ function Dashboard() {
 
 				setCertEvents(certs);
 				setCreatedEvents(created);
+				setLoading(false);
 			});
 		} catch (error) {
 			console.log(error);
@@ -62,7 +63,6 @@ function Dashboard() {
 			setName(localStorage.getItem("name"));
 			getCertificates();
 		} else setLoggedIn(false);
-		setLoading(false);
 	}, []);
 
 	useEffect(() => {
