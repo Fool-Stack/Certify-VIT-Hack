@@ -166,7 +166,8 @@ const getCertificates = async (req, res, next) => {
 
     
    
-  }).promise().then(async ()=>{
+  }).promise().then(async (data)=>{
+    console.log(data)
     if(req.body.templateNumber == 1){
       console.log('html  ', i)
     await  html.push(await htmlTemplates.TEMPLATE_1(users[i],data.Location,users[i].link))
