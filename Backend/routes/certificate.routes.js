@@ -1,0 +1,10 @@
+const express = require('express');
+const multer = require('multer')
+const checkAuth = require('../middleware/checkAuth');
+const certificateControllers = require('../controllers/certificate.controllers')
+const router = express.Router();
+const upload = multer({ dest: './data' });
+
+router.get('/add', checkAuth, certificateControllers.viewCertificateDetailsFromQrCode);
+
+module.exports = router
