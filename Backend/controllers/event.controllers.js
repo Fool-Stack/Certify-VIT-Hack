@@ -12,11 +12,12 @@ const Event = require('../models/event');
 const Certificate = require('../models/certificate')
 const emailTemplates=require('../emails/email')
 const htmlTemplates = require('../templates/html-1');
+var qrcode = require('qrcode')
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 sgMail.setApiKey(process.env.SendgridAPIKey);
 
-const addEvent = async (req , res)=>{
+const addEvent = async (req , res, next)=>{
   if(req.body.secret==null){
     return res.status(403).json({
       message: "Only admins can create an event"
@@ -56,7 +57,7 @@ const addEvent = async (req , res)=>{
       }
 }
 
-const deleteEvent = async(req, res) => {
+const deleteEvent = async(req, res, next) => {
   const { event_id } = req.body
   await Event.deleteOne({_id: event_id})
   .then((result)=>{
@@ -72,7 +73,7 @@ const deleteEvent = async(req, res) => {
   })
 }
 
-const getEventByID = async (req, res) => {
+const getEventByID = async (req, res, next) => {
   const event_id = req.params.id
   const event = await Event.findById(event_id)
   if(event){
@@ -89,7 +90,7 @@ const getEventByID = async (req, res) => {
   }
 }
 
-const updateEvent = async(req, res) => {
+const updateEvent = async(req, res, next) => {
   await Event.updateOne({ _id: req.body._id }, req.body).then((result)=>{
     console.log(req.body)
     return res.status(200).json({
@@ -117,7 +118,7 @@ const updateEvent = async(req, res) => {
 //   date: "10-10-2002"
 // })
 
-const getCertificates = async (req, res) => {
+const getCertificates = async (req, res, next) => {
   const html = [];
   const event_id = req.body.event_id
   const users = await csv().fromFile(req.file.path);
@@ -125,12 +126,18 @@ const getCertificates = async (req, res) => {
   console.log(users)
   for(let i = 0; i < users.length; i++){
     const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + shortid.generate()
+    users[i].link = await qrcode.toDataURL(QRCodeLINK)
+    var base64Data = users[i].link.replace(/^data:image\/png;base64,/, "");
+    await fs.writeFile("out.png", base64Data, 'base64', function(err) {
+      console.log(err);
+    });
     html.push(htmlTemplates.TEMPLATE_1(users[i]))
+    console.log(html)
   
   console.log('html DOne')
     
      const filename = 'gg' + Date.now()
-    pdf.create(html[i], {}).toStream(function(err, stream) {
+    pdf.create(html[i], { timeout: '100000' }).toStream(function(err, stream) {
       if (err) return console.log(err)
       if(i==users.length-1){
       uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK)

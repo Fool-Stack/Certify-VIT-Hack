@@ -31,16 +31,16 @@
         <div style="font-size: 36px;font-weight: 600;margin: 12px 0;font-style: oblique;">${Certify}</div>
         <div style="font-size: 38px;">with a score of <span style="font-weight: 600;">${Score}</span></div>
         <div style="font-size: 36px;font-weight: 600;margin: 8px 0;font-style: oblique;">Dated: ${Date}</div>
-        <div style="position: absolute; bottom: 40px; left: 40px;"><canvas id="canvas"></canvas></div>
+        <div style="position: absolute; bottom: 40px; left: 40px;"><img src="../out.png"></div>
         <div style="position: absolute; top: 30px; right: 50px; background-color: #ffffff88;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="160px"></div>
     </div>
 </body>
-<script src="../node_modules/qrcode/build/qrcode.min.js"></script>
+<!-- <script src="../node_modules/qrcode/build/qrcode.min.js"></script>
 <script>
     QRCode.toCanvas(document.getElementById('canvas'), 'https://jugaldb.com', function (error) {
         if (error) console.error(error)
         console.log('success!');
     })
-</script>
+</script> -->
 
 </html>

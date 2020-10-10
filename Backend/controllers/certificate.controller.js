@@ -15,7 +15,7 @@ const htmlTemplates = require('../templates/html-1');
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 
-const viewCertificateDetailsFromQrCode = async (req, res) => {
+const viewCertificateDetailsFromQrCode = async (req, res, next) => {
   const { certificate_params } = req.params
   const certificate = await Certificate.findOne({ auth_link: "https://certify.jugaldb.com/?id=" + certificate_params})
   if(certificate){
