@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ActionButton from "../ActionButton/ActionButton";
 import "./EventItem.css";
 
-function EventItem({ info, admin, link }) {
+function EventItem({ info, admin, link, id }) {
 	return (
 		<div className="event-item">
 			<div className="event-detail">
@@ -19,9 +20,11 @@ function EventItem({ info, admin, link }) {
 			</div>
 			<div className="event-btn-section">
 				{admin ? (
-					<ActionButton className="event-btn">
-						View Event
-					</ActionButton>
+					<Link to={`/event/${id}`}>
+						<ActionButton className="event-btn">
+							View Event
+						</ActionButton>
+					</Link>
 				) : (
 					<ActionButton
 						className="event-btn"
