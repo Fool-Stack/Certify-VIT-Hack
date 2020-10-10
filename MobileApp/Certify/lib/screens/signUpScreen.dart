@@ -1,5 +1,6 @@
 import 'package:Certify/animations/bounceIn.dart';
 import 'package:Certify/animations/bounceOut.dart';
+import 'package:Certify/screens/homeScreen.dart';
 import 'package:Certify/screens/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -82,9 +83,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     right: size.width * 8 / 100,
                   ),
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 1 / 100,
-                    vertical: size.height * 0.8 / 100,
+                  padding: EdgeInsets.only(
+                    left: size.width * 1 / 100,
+                    right: size.width * 1 / 100,
+                    bottom: size.height * 0.5 / 100,
+                    top: size.height * 0.1 / 100,
                   ),
                   width: double.infinity,
                   height: size.height * 6 / 100,
@@ -124,9 +127,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     right: size.width * 8 / 100,
                   ),
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 1 / 100,
-                    vertical: size.height * 0.8 / 100,
+                  padding: EdgeInsets.only(
+                    left: size.width * 1 / 100,
+                    right: size.width * 1 / 100,
+                    bottom: size.height * 0.5 / 100,
+                    top: size.height * 0.1 / 100,
                   ),
                   width: double.infinity,
                   height: size.height * 6 / 100,
@@ -169,7 +174,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: EdgeInsets.only(
                     left: size.width * 1 / 100,
                     right: size.width * 1 / 100,
-                    bottom: size.height * 0.8 / 100,
+                    bottom: size.height * 0.5 / 100,
                     top: size.height * 0.1 / 100,
                   ),
                   width: double.infinity,
@@ -234,7 +239,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     size.height * 1 / 100,
                   ),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        BounceIn(
+                          widget: HomeScreen(),
+                        ),
+                      );
+                    },
                     splashColor: Theme.of(context).accentColor,
                     child: Center(
                       child: Text(
