@@ -5,10 +5,14 @@ require("dotenv").config();
 const passport = require("passport");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+var QRCode = require('qrcode')
+ 
+
 
 ////routers
 const eventRoutes = require('./Backend/routes/event.routes')
 const userRoutes = require('./Backend/routes/user.routes');
+const certificateRoutes = require('./Backend/routes/certificate.routes')
 const s3UploadClient = require("./Backend/middleware/s3UploadClient");
 
 const app = express();
@@ -46,8 +50,10 @@ app.post("/upload", s3UploadClient.upload.array("inputFile", 1) , async (req,res
 
 } )
 
+
 app.use('/user', userRoutes);
 app.use('/event',eventRoutes)
+app.use('/certificate', certificateRoutes)
 //  apply to all requests
 app.use(limiter);
 

@@ -9,7 +9,6 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "../../components/TextInput/TextInput";
 import Navbar from "../../components/Navbar/Navbar";
-// import "./SignupPage.css";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import ActionButton from "../../components/ActionButton/ActionButton";
 
