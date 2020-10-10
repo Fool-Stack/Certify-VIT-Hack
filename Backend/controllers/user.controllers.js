@@ -240,8 +240,9 @@ const seeAllEvents = async (req, res, next) => {
   const _id = req.user.userId
   const user = await User.findById( _id )      
   .populate({
-    path: "event_id",
+    path: "events",
     select: "name participants date",
+    populate:"event_id"
   })
   if(user){
     return res.status(200).json({
