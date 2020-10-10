@@ -9,6 +9,7 @@ const csv = require('csvtojson');
 const fs = require('fs');
 const User = require('../models/user');
 const Event = require('../models/event');
+const Certficate = require('../models/certificate')
 const htmlTemplates = require('../templates/html-1');
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
@@ -123,20 +124,19 @@ const getCertificates = async (req, res) => {
   fs.unlinkSync(req.file.path);
   console.log(users)
   for(let i = 0; i < users.length; i++){
+    const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + shortid.generate()
     html.push(htmlTemplates.TEMPLATE_1(users[i]))
-  }
+  
   console.log('html DOne')
-
-  for(let i = 0; i < users.length; i++){
     
      const filename = 'gg' + Date.now()
     pdf.create(html[i], {}).toStream(function(err, stream) {
       if (err) return console.log(err)
       if(i==users.length-1){
-      uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name)
+      uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK)
       }
       else{
-        uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name)
+        uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, QRCodeLINK)
       }
 
     });
@@ -144,7 +144,7 @@ const getCertificates = async (req, res) => {
   console.log(users)
 }
 
-const uploadToS3 = async (res,body, filename,email,event_id,isLast, name) => {
+const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCodeLINK) => {
   AWS.config.update({
     accessKeyId: process.env.AWS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS
@@ -221,7 +221,13 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name) => {
         }
       });
     }
-   await User.updateOne({email:email},{$push:{events:{event_id:event_id,certificate_link:data.Location}}}).then(()=>{
+   await User.updateOne({email:email},{$push:{events:{event_id:event_id,certificate_link:data.Location}}}).then(async()=>{
+     await Certificate.insert({
+       certificate_link: data.Location,
+       auth_link: QRCodeLINK,
+       user_name: name,
+       user_email: email,
+     })
       console.log("lolgg")
       if(isLast){
          return res.status(200).json({

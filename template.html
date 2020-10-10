@@ -30,6 +30,16 @@
         <div style="font-size: 38px;">with a score of <span style="font-weight: 600;">${Score}</span></div>
         <div style="font-size: 36px;font-weight: 600;margin: 8px 0;font-style: oblique;">Dated: ${Date}</div>
     </div>
+    <canvas id="canvas">
+
+    </canvas>
 </body>
+<script src="./node_modules/qrcode/build/qrcode.min.js"></script>
+<script>
+  QRCode.toCanvas(document.getElementById('canvas'), 'https://jugaldb.com', function (error) {
+    if (error) console.error(error)
+    console.log('success!');
+  })
+</script> 
 
 </html>

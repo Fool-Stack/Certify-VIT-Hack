@@ -5,6 +5,9 @@ require("dotenv").config();
 const passport = require("passport");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+var QRCode = require('qrcode')
+ 
+
 
 ////routers
 const eventRoutes = require('./Backend/routes/event.routes')
@@ -45,6 +48,12 @@ app.post("/upload", s3UploadClient.upload.array("inputFile", 1) , async (req,res
 		})
 
 } )
+
+app.get('/suqqq' , (req,res)=>{
+  QRCode.toString('https://jugaldb.com',{type:'terminal'}, function (err, url) {
+    res.status(200).send(url)
+  })
+})
 
 app.use('/user', userRoutes);
 app.use('/event',eventRoutes)
