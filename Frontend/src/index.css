@@ -6,8 +6,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #1f1f1f;
   color: white;
+  height: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
 }
