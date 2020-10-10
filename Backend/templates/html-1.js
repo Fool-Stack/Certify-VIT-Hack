@@ -1,5 +1,5 @@
 const templates = {
-	TEMPLATE_1: (userData) => {
+	TEMPLATE_1: (userData,qr) => {
     return `
     <!DOCTYPE html>
     <html>
@@ -35,7 +35,7 @@ const templates = {
             <div style="font-size: 38px;">with a score of <span style="font-weight: 600;">${userData.score}</span></div>
             <div style="font-size: 36px;font-weight: 600;margin: 8px 0;font-style: oblique;">Dated: ${userData.date}</div>
             <div style="position: absolute; bottom: 40px; left: 40px;"><img src="../../out.png"></div>
-            <div style="position: absolute; top: 30px; right: 50px; background-color: #ffffff88;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="160px"></div>
+            <div style="position: absolute; top: 30px; right: 50px; background-color: #ffffff88;"><img src=${qr} width="160px"></div>
         </div>
     </body>
     </html>
