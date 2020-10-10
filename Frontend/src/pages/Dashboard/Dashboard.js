@@ -1,4 +1,5 @@
 import { Drawer } from "@material-ui/core";
+import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import DashNavbar from "../../components/DashNavbar/DashNavbar";
@@ -11,6 +12,7 @@ import "./Dashboard.css";
 function Dashboard() {
 	const [isLoggedIn, setLoggedIn] = useState(true);
 	const [loading, setLoading] = useState(true);
+	const [refresh, setRefresh] = useState(false);
 
 	const [name, setName] = useState("");
 	const [events, setEvents] = useState([]);
@@ -20,7 +22,25 @@ function Dashboard() {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const drawerWidth = 256;
 
-	const getCertificates = async () => {};
+	const backend = process.env.REACT_APP_BACKEND_URL;
+
+	const getCertificates = async () => {
+		let url = `${backend}/user/events`;
+		let token = localStorage.getItem("authToken");
+
+		try {
+			await Axios.get(url, {
+				headers: {
+					"auth-token": token,
+				},
+			}).then((res) => {
+				console.log(res.data);
+				setEvents(res.data.events);
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		if (localStorage.getItem("authToken")) {
@@ -32,8 +52,8 @@ function Dashboard() {
 	}, []);
 
 	useEffect(() => {
-		console.log(openDash);
-	}, [openDash]);
+		if (refresh) getCertificates();
+	}, [refresh]);
 
 	if (loading) {
 		return <Loading />;
@@ -67,7 +87,7 @@ function Dashboard() {
 					<MyCertificates events={events} />
 				</TabPanel>
 				<TabPanel value={openDash} index={2}>
-					<MyEvents events={events} />
+					<MyEvents events={events} setRefresh={setRefresh} />
 				</TabPanel>
 			</div>
 		</div>

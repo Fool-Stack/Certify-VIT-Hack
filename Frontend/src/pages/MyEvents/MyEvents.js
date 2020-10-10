@@ -6,7 +6,7 @@ import TextInput from "../../components/TextInput/TextInput";
 import ActionButton from "../../components/ActionButton/ActionButton";
 import axios from "axios";
 
-function MyEvents({ events }) {
+function MyEvents({ events, setRefresh }) {
 	const [eventModal, setEventModal] = useState(false);
 
 	const [newEventName, setEventName] = useState("");
@@ -60,6 +60,7 @@ function MyEvents({ events }) {
 				.then((res) => {
 					console.log(res);
 					setLoading(false);
+					setRefresh(true);
 					onCloseHandle();
 					clearModal();
 				});
