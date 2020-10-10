@@ -12,6 +12,8 @@ function Dashboard() {
 
 	const [name, setName] = useState("");
 
+	const [openDash, setOpenDash] = useState(1);
+
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const drawerWidth = 256;
 
@@ -43,10 +45,15 @@ function Dashboard() {
 				className="dash-drawer"
 				style={{ width: `${drawerWidth}px` }}
 			>
-				<Sidebar name={name} />
+				<Sidebar
+					name={name}
+					setOpenDash={setOpenDash}
+					openDash={openDash}
+					setLoggedIn={setLoggedIn}
+				/>
 			</Drawer>
 			<div className="dash-screen">
-				<h1>Dashboard</h1>
+				<h1>Dashboard {openDash}</h1>
 			</div>
 		</div>
 	);
