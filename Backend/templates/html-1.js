@@ -1,5 +1,5 @@
 const templates = {
-	TEMPLATE_1: (userData) => {
+	TEMPLATE_1: (userData,qr,link) => {
     return `<!DOCTYPE html>
     <html>
     
@@ -34,13 +34,14 @@ const templates = {
             <div style="font-size: 36px; font-weight: 600;margin: 12px 0;font-style: oblique;top: 310px;">${userData.event}</div>
             <div style="font-size: 38px;top: 380px;">with a score of <span style="font-weight: 600;">${userData.score}</span></div>
             <div style="font-size: 36px;font-weight: 600;margin: 8px 0;font-style: oblique;top: 440px;">Dated: ${userData.date}</div>
-            <div style="bottom: 18px;right: 18px; font-size: 12px;width: fit-content;"><a href="${userData.link}" style="text-decoration: none;">${userData.link}</div>
-            <div style="top: 30px;left: 50px;background-color: #ffffff88;width: fit-content;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="160px"></div>
+            <div style="bottom: 40px;right: 40px;width: fit-content; text-align: right;"><img src="${qr}" style="width: 148px; height: 148px;"></div>
+            <div style="bottom: 18px;right: 18px; font-size: 14px;width: fit-content;"><a href="${link}" style="font-weight: 600;">${link}</div>
+            <div style="top: 30px;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" style="width: 160px; margin-left: -25px;"></div>
         </div>
     </body>
     </html>`
   },
-  TEMPLATE_2: (userData) => {
+  TEMPLATE_2: (userData,qr,link) => {
     return `
     <!DOCTYPE html>
 <html>
@@ -76,7 +77,8 @@ const templates = {
         <div style="font-size: 36px; font-weight: 600;margin: 12px 0;font-style: oblique;top: 310px;">${userData.event}</div>
         <div style="font-size: 38px; top: 380px;">with a score of <span style="font-weight: 600;">${userData.score}/100</span></div>
         <div style="font-size: 36px;font-weight: 600;margin: 8px 0;font-style: oblique;top: 440px;">Dated: ${userData.date}</div>
-        <div style="bottom: 18px;right: 18px; font-size: 14px;width: fit-content;"><a href="${userData.link}" style="text-decoration: none; color: #fff; font-weight: 600;">${userData.link}</div>
+        <div style="bottom: 40px;right: 40px;width: fit-content; text-align: right;"><img src="${qr}" style="width: 148px; height: 148px;"></div>
+        <div style="bottom: 18px;right: 18px; font-size: 14px;width: fit-content;"><a href="${link}" style="text-decoration: none; color: #fff; font-weight: 600;">${link}</div>
         <div style="top: 30px;"><img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="160px"></div>
     </div>
 </body>

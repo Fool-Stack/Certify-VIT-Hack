@@ -158,34 +158,37 @@ const getCertificates = async (req, res, next) => {
   await s3Bucket.upload(data, async function(err, data){
 
         console.log('succesfully uploaded the image!',data.Location);
-        if(req.body.templateNumber == 1){
-          html.push(htmlTemplates.TEMPLATE_1(users[i],data.Location))
-        }
-        else if(req.body.templateNumber == 2) {
-          html.push(htmlTemplates.TEMPLATE_2(users[i],data.Location))
-        }
-        else{
-          html.push(htmlTemplates.TEMPLATE_3(users[i],data.Location))
-        }
-        const filename = 'gg' + Date.now()
-        await pdf.create(html[i], { height:"375px", width:"620px", timeout: '100000' }).toStream(async function(err, stream) {
-          if (err) return console.log(err)
-          if(i==users.length-1){
-         await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK, auth_params)
-          }
-          else{
-          await   uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, QRCodeLINK ,auth_params)
-          }
-    
-        });
-      
-  // });
+        
+         // });
     // await fs.writeFile("out.png", base64Data, 'base64', function(err) {
     //   console.log(err);
     // });
 
     
    
+  }).promise().then(async (data)=>{
+    console.log(data)
+    if(req.body.templateNumber == 1){
+      console.log('html  ', i)
+    await  html.push(await htmlTemplates.TEMPLATE_1(users[i],data.Location,users[i].link))
+    }
+    else if(req.body.templateNumber == 2) {
+      console.log('html  ', i)
+      html.push(await htmlTemplates.TEMPLATE_2(users[i],data.Location,users[i].link))
+    }
+    const filename = 'gg' + Date.now()
+    await pdf.create(html[i], { height:"375px", width:"620px", timeout: '100000' }).toStream(async function(err, stream) {
+      if (err) return console.log(err)
+      if(i==users.length-1){
+     await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK, auth_params)
+      }
+      else{
+      await   uploadToS3(res,stream, filename,users[i].email,event_id,false, users[i].name, QRCodeLINK ,auth_params)
+      }
+
+    });
+  
+
   })
 }
   console.log(users)
@@ -280,7 +283,7 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCode
        user_email: email,
      })
      await certificate.save()
-      console.log(certificate)
+      //console.log(certificate)
       if(isLast){
          return res.status(200).json({
             message : "chintu koding"

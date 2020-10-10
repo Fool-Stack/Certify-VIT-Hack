@@ -244,6 +244,7 @@ const seeAllEvents = async (req, res, next) => {
     select: "name participants date",
     populate:"event_id"
   })
+  console.log(user)
   console.log(user.events)
   if(user){
     return res.status(200).json({
