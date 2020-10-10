@@ -30,11 +30,13 @@
 .sidebar-menu {
 	height: 100%;
 	display: flex !important;
-	justify-content: flex-start !important;
+	flex-direction: column !important;
+	justify-content: space-between !important;
 	align-items: flex-start !important;
 	/* padding-left: 10% !important; */
 	font-size: 1rem;
 	font-weight: 900;
+	padding-bottom: 50px !important;
 }
 
 .sidebar-link {
