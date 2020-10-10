@@ -53,7 +53,7 @@ class _ChooseTemplateScreenState extends State<ChooseTemplateScreen> {
               ),
               Container(
                 margin: EdgeInsets.symmetric(
-                  horizontal: size.width * 25 / 100,
+                  horizontal: size.width * 15 / 100,
                 ),
                 height: size.height * 8 / 100,
                 width: double.infinity,
@@ -82,7 +82,7 @@ class _ChooseTemplateScreenState extends State<ChooseTemplateScreen> {
                     child: Text(
                       "Generate Certificates",
                       style: GoogleFonts.montserrat(
-                        fontSize: size.height * 1.8 / 100,
+                        fontSize: size.width * 4 / 100,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).backgroundColor,
                       ),
