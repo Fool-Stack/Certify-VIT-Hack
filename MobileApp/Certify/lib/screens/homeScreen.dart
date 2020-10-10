@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Material(
         child: SingleChildScrollView(
           child: Container(
-            color: Color(0xff1f1f1f),
             height: double.maxFinite,
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -59,9 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     right: MediaQuery.of(context).size.width * 6 / 100,
                   ),
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 1 / 100,
-                    vertical: MediaQuery.of(context).size.height * 0.8 / 100,
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 1 / 100,
+                    right: MediaQuery.of(context).size.width * 1 / 100,
+                    bottom: MediaQuery.of(context).size.height * 0.5 / 100,
+                    top: MediaQuery.of(context).size.height * 0.1 / 100,
                   ),
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 6 / 100,
@@ -101,9 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     right: MediaQuery.of(context).size.width * 6 / 100,
                   ),
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 1 / 100,
-                    vertical: MediaQuery.of(context).size.height * 0.8 / 100,
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 1 / 100,
+                    right: MediaQuery.of(context).size.width * 1 / 100,
+                    bottom: MediaQuery.of(context).size.height * 0.5 / 100,
+                    top: MediaQuery.of(context).size.height * 0.1 / 100,
                   ),
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 6 / 100,
@@ -160,8 +163,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         "Create Event",
                         style: GoogleFonts.montserrat(
                           fontSize:
-                              MediaQuery.of(context).size.height * 3 / 100,
-                          fontWeight: FontWeight.w400,
+                              MediaQuery.of(context).size.height * 2 / 100,
+                          fontWeight: FontWeight.w600,
                           color: Theme.of(context).backgroundColor,
                         ),
                       ),

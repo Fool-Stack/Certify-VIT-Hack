@@ -61,9 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     right: size.width * 8 / 100,
                   ),
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 1 / 100,
-                    vertical: size.height * 0.8 / 100,
+                  padding: EdgeInsets.only(
+                    left: size.width * 1 / 100,
+                    right: size.width * 1 / 100,
+                    bottom: size.height * 0.5 / 100,
+                    top: size.height * 0.1 / 100,
                   ),
                   width: double.infinity,
                   height: size.height * 6 / 100,
@@ -106,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.only(
                     left: size.width * 1 / 100,
                     right: size.width * 1 / 100,
-                    bottom: size.height * 0.8 / 100,
+                    bottom: size.height * 0.5 / 100,
                     top: size.height * 0.1 / 100,
                   ),
                   width: double.infinity,
