@@ -1,0 +1,44 @@
+.event-item {
+	background-color: black;
+	border-radius: 10px;
+	margin: 0 5%;
+	margin-bottom: 8%;
+	margin-left: 0;
+	padding: 3% 13%;
+	box-shadow: rgb(0, 0, 0) 0 0 10px;
+	transition: ease-in-out 0.2s;
+}
+
+.event-item:hover {
+	transform: scale(1.05);
+}
+
+.event-detail {
+	display: flex;
+	justify-content: space-between;
+}
+
+.event-name-section {
+	text-align: center;
+}
+
+.event-name-span {
+	font-size: 0.75rem;
+	font-weight: 500;
+	color: #5757ff;
+}
+
+.event-name-detail {
+	margin-top: 2px;
+	font-weight: 700;
+	font-size: 1.1rem;
+}
+
+.event-btn-section {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.event-btn:hover {
+	background-color: #4444cc !important;
+}

@@ -1,10 +1,17 @@
-import { CircularProgress, Dialog, Fab, TextField } from "@material-ui/core";
+import {
+	CircularProgress,
+	Dialog,
+	Fab,
+	Grid,
+	TextField,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import { Add } from "@material-ui/icons";
 import "./MyEvents.css";
 import TextInput from "../../components/TextInput/TextInput";
 import ActionButton from "../../components/ActionButton/ActionButton";
 import axios from "axios";
+import EventItem from "../../components/EventItem/EventItem";
 
 function MyEvents({ events, setRefresh }) {
 	const [eventModal, setEventModal] = useState(false);
@@ -82,7 +89,15 @@ function MyEvents({ events, setRefresh }) {
 					<h3 className="no-cert">
 						You do not have any events... Create one right now!
 					</h3>
-				) : null}
+				) : (
+					<Grid container>
+						{events.map((event) => (
+							<Grid item sm={6} md={4}>
+								<EventItem info={event} />
+							</Grid>
+						))}
+					</Grid>
+				)}
 			</div>
 			<Fab
 				color="primary"
