@@ -1,8 +1,12 @@
+import 'package:Certify/animations/bounceIn.dart';
+import 'package:Certify/screens/downloadScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ChooseTemplateScreen extends StatefulWidget {
   @override
+  final List contacts;
+  ChooseTemplateScreen({@required this.contacts});
   _ChooseTemplateScreenState createState() => _ChooseTemplateScreenState();
 }
 
@@ -63,7 +67,16 @@ class _ChooseTemplateScreenState extends State<ChooseTemplateScreen> {
                   size.height * 1 / 100,
                 ),
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      BounceIn(
+                        widget: DownloadScreen(
+                          contacts: widget.contacts,
+                        ),
+                      ),
+                    );
+                  },
                   splashColor: Theme.of(context).accentColor,
                   child: Center(
                     child: Text(

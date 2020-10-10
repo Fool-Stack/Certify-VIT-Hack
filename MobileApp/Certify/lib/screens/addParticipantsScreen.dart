@@ -224,7 +224,9 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                     Navigator.push(
                       context,
                       BounceIn(
-                        widget: ChooseTemplateScreen(),
+                        widget: ChooseTemplateScreen(
+                          contacts: contacts,
+                        ),
                       ),
                     );
                   },
