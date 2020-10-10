@@ -37,6 +37,22 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// Allow CORS
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept, Authorization,auth-token"
+	);
+	if (req.method === "OPTIONS") {
+		res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+		return res.status(200).json({});
+	}
+	next();
+});
+
+app.use(cors());
 /////Rate Limiter
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
@@ -57,27 +73,12 @@ app.use('/certificate', certificateRoutes)
 //  apply to all requests
 app.use(limiter);
 
-// Allow CORS
-// app.use((req, res, next) => {
-// 	res.header("Access-Control-Allow-Origin", "*");
-// 	res.header(
-// 		"Access-Control-Allow-Headers",
-// 		"Origin, X-Requested-With, Content-Type, Accept, Authorization,auth-token"
-// 	);
-// 	if (req.method === "OPTIONS") {
-// 		res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-// 		return res.status(200).json({});
-// 	}
-// 	next();
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
 // });
 
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-app.use(cors());
 
 
 //route not found
