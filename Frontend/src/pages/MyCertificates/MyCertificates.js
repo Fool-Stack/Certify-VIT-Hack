@@ -1,7 +1,7 @@
 import React from "react";
 import "./MyCertificates.css";
 
-function MyCertificates({ certs }) {
+function MyCertificates({ events }) {
 	return (
 		<div className="certificates-section">
 			<h1 className="section-heading">
@@ -10,7 +10,7 @@ function MyCertificates({ certs }) {
 				</span>
 			</h1>
 			<div className="certificate-list">
-				{certs.length == 0 ? (
+				{events.length === 0 ? (
 					<h3 className="no-cert">
 						You do not have any certificates right now!
 					</h3>

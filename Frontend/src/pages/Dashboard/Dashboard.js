@@ -5,6 +5,7 @@ import DashNavbar from "../../components/DashNavbar/DashNavbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Loading from "../Loading/Loading";
 import MyCertificates from "../MyCertificates/MyCertificates";
+import MyEvents from "../MyEvents/MyEvents";
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -12,7 +13,7 @@ function Dashboard() {
 	const [loading, setLoading] = useState(true);
 
 	const [name, setName] = useState("");
-	const [certificates, setCertificates] = useState([]);
+	const [events, setEvents] = useState([]);
 
 	const [openDash, setOpenDash] = useState(1);
 
@@ -20,11 +21,6 @@ function Dashboard() {
 	const drawerWidth = 256;
 
 	const getCertificates = async () => {};
-
-	const dashboardSection = () => {
-		if (openDash === 1) return <MyCertificates certs={certificates} />;
-		else if (openDash === 2) return <MyEvents />;
-	};
 
 	useEffect(() => {
 		if (localStorage.getItem("authToken")) {
@@ -34,6 +30,10 @@ function Dashboard() {
 		} else setLoggedIn(false);
 		setLoading(false);
 	}, []);
+
+	useEffect(() => {
+		console.log(openDash);
+	}, [openDash]);
 
 	if (loading) {
 		return <Loading />;
@@ -63,11 +63,29 @@ function Dashboard() {
 				/>
 			</Drawer>
 			<div className="dash-screen">
-				{/* <h1>Dashboard {openDash}</h1> */}
-				<MyCertificates certs={certificates} />
+				<TabPanel value={openDash} index={1}>
+					<MyCertificates events={events} />
+				</TabPanel>
+				<TabPanel value={openDash} index={2}>
+					<MyEvents events={events} />
+				</TabPanel>
 			</div>
 		</div>
 	);
 }
 
 export default Dashboard;
+
+function TabPanel(props) {
+	return (
+		<div
+			role="tabpanel"
+			hidden={props.value !== props.index}
+			id={`simple-tabpanel-${props.index}`}
+			aria-labelledby={`simple-tab-${props.index}`}
+			style={{ height: "100%" }}
+		>
+			<div>{props.children}</div>
+		</div>
+	);
+}

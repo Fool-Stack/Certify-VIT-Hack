@@ -1,0 +1,33 @@
+.MuiFab-primary {
+	background-color: #5757ff !important;
+}
+
+.add-event-btn {
+	position: absolute !important;
+	bottom: 50px;
+	right: 50px;
+}
+
+.add-event-btn:hover {
+	background-color: #4444cc !important;
+}
+
+.add-event-section {
+	padding: 5%;
+	text-align: center !important;
+}
+
+.add-event-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.date-picker .MuiFormLabel-root {
+	color: #5757ff !important;
+	font-weight: bold !important;
+}
+
+.date-picker .MuiInputBase-input {
+	color: white !important;
+	/* color: rgb(31, 31, 31); */
+}
