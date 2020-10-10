@@ -1,5 +1,9 @@
 import {
-	Container, Typography, Button, InputAdornment, IconButton
+	Container,
+	Typography,
+	Button,
+	InputAdornment,
+	IconButton,
 } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +11,7 @@ import TextInput from "../../components/TextInput/TextInput";
 import Navbar from "../../components/Navbar/Navbar";
 // import "./SignupPage.css";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import ActionButton from "../../components/ActionButton/ActionButton";
 
 function SignupPage() {
 	const [email, changeEmail] = useState("");
@@ -54,9 +59,7 @@ function SignupPage() {
 		}
 	};
 
-	const handleSubmit = () => {
-
-	}
+	const handleSubmit = () => {};
 
 	return (
 		<>
@@ -64,8 +67,7 @@ function SignupPage() {
 			<Container className="login-page">
 				<Typography variant="h3" color="primary" className="login-head">
 					Sign Up
-                </Typography>
-				<br />
+				</Typography>
 				<form className="form">
 					<TextInput
 						id="name"
@@ -98,27 +100,30 @@ function SignupPage() {
 										aria-label="show password"
 										onClick={togglePasswordVisibility}
 										edge="end"
+										className="view-pass-icon"
 									>
 										{showPassword ? (
 											<Visibility />
 										) : (
-												<VisibilityOff />
-											)}
+											<VisibilityOff />
+										)}
 									</IconButton>
 								</InputAdornment>
 							),
 						}}
 					></TextInput>
 				</form>
-				<Button className="login-btn">
-					Sign Up
-				    </Button>
-				<Typography variant="h6" color="primary">
-					--- OR ---
-                    </Typography>
-				<Link to={`/login`}><Button className="login-btn-outline">
-					Login
-				    </Button></Link>
+				<div className="login-btn-div">
+					<ActionButton className="login-btn">REGISTER</ActionButton>
+					<Typography variant="h6" color="primary">
+						--- OR ---
+					</Typography>
+					<Link to={`/login`}>
+						<ActionButton className="transparent-variant">
+							LOGIN
+						</ActionButton>
+					</Link>
+				</div>
 			</Container>
 		</>
 	);

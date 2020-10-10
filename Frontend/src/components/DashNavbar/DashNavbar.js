@@ -3,14 +3,18 @@
 import React from "react";
 import { AppBar, Avatar, IconButton, Toolbar } from "@material-ui/core";
 import "./DashNavbar.css";
-import { Menu } from "@material-ui/icons";
+import { Close, Menu } from "@material-ui/icons";
 
 function DashNavbar({ open, setOpen }) {
 	return (
 		<AppBar position="static" className="navbar" elevation={0}>
 			<Toolbar className="nav-toolbar">
 				<IconButton edge="start" onClick={() => setOpen(!open)}>
-					<Menu className="nav-drawer-icon" fontSize="large" />
+					{open ? (
+						<Close className="nav-drawer-icon" fontSize="large" />
+					) : (
+						<Menu className="nav-drawer-icon" fontSize="large" />
+					)}
 				</IconButton>
 				<img
 					src="./assets/certify.svg"
