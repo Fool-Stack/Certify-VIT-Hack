@@ -129,7 +129,7 @@ const getCertificates = async (req, res, next) => {
   const event_id = req.body.event_id
   const users = await csv().fromFile(req.file.path);
   fs.unlinkSync(req.file.path);
-  console.log(users)
+  // console.log(users)
   for(let i = 0; i < users.length; i++){
     const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + shortid.generate()
   //   users[i].link = await qrcode.toDataURL(QRCodeLINK)
@@ -262,6 +262,7 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCode
       _id:new mongoose.Types.ObjectId(),
        certificate_link: data.Location,
        auth_link: QRCodeLINK,
+       event_id: event_id,
        user_name: name,
        user_email: email,
      })
