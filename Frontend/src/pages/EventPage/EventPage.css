@@ -36,6 +36,10 @@
 	margin-bottom: 2% !important;
 }
 
+.template-zone {
+	padding: 3%;
+}
+
 .dropzone {
 	background-color: rgb(70, 70, 70);
 	padding: 3%;
@@ -52,7 +56,7 @@
 }
 
 .add-participants-btn {
-	margin-top: 10%;
+	margin-top: 7%;
 	text-align: center;
 }
 

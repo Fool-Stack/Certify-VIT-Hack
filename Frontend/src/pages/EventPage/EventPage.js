@@ -15,6 +15,8 @@ import DashNavbar from "../../components/DashNavbar/DashNavbar";
 import Loading from "../Loading/Loading";
 import "./EventPage.css";
 import Dropzone from "react-dropzone";
+import ImageSelect from "../../components/ImageSelect/ImageSelect";
+import {templates} from "../../templates/templates";
 
 function EventPage(props) {
 	const [loading, setLoading] = useState(true);
@@ -22,11 +24,13 @@ function EventPage(props) {
 
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
+	const [selected, setSelected] = useState(1);
 
 	const [submitLoading, setSubmitLoading] = useState(false);
 
 	const id = props.match.params.id;
 	const backend = process.env.REACT_APP_BACKEND_URL;
+
 
 	const onCloseHandle = () => {
 		setOpen(false);
@@ -40,7 +44,7 @@ function EventPage(props) {
 		setSubmitLoading(true);
 		let data = new FormData();
 		data.append("file", file);
-		data.append("templateNumber", 2);
+		data.append("templateNumber", selected);
 		data.append("event_id", id);
 
 		let url = `${backend}/event/certificates`;
@@ -58,6 +62,7 @@ function EventPage(props) {
 				},
 			}).then((res) => {
 				console.log(res);
+				getDetails();
 				setSubmitLoading(false);
 				setFile(null);
 				onCloseHandle();
@@ -163,7 +168,12 @@ function EventPage(props) {
 				style={{ width: "100%" }}
 			>
 				<div className="add-participants-modal">
+					<div className="template-zone">
+						<h3>Select a template: </h3>
+						<ImageSelect images={templates} selected={selected} setSelected={setSelected} />
+					</div>
 					<div className="dropzone">
+						<h3>Upload a file: </h3>
 						<Dropzone
 							onDrop={(acceptedFiles) =>
 								handleFileDrop(acceptedFiles)
