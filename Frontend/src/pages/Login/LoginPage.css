@@ -107,3 +107,7 @@
 .MuiFormLabel-root {
 	font-family: "Inter", sans-serif !important;
 }
+
+.MuiCircularProgress-colorSecondary {
+	color: white !important;
+}

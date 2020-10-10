@@ -13,6 +13,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import "./LoginPage.css";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import ActionButton from "../../components/ActionButton/ActionButton";
+import axios from "axios";
 
 function LoginPage() {
 	const [email, changeEmail] = useState("");
@@ -40,6 +41,8 @@ function LoginPage() {
 	const mailErrorText = "Email cannot be empty";
 	const passwordErrorText = "Password cannot be empty";
 
+	const backend = process.env.REACT_APP_BACKEND_URL;
+
 	const handleEmailChange = (event) => {
 		setEmailChanged(true);
 		changeEmail(event.target.value);
@@ -60,7 +63,9 @@ function LoginPage() {
 		}
 	};
 
-	const handleSubmit = () => {};
+	const handleSubmit = () => {
+		const url = `${backend}/`;
+	};
 
 	return (
 		<>
@@ -118,7 +123,6 @@ function LoginPage() {
 					>
 						--- OR ---
 					</Typography>
-
 					<Link to={`/register`}>
 						<ActionButton className="transparent-variant">
 							Register

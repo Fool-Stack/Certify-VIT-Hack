@@ -4,15 +4,18 @@ import {
 	Button,
 	InputAdornment,
 	IconButton,
+	CircularProgress,
 } from "@material-ui/core";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import TextInput from "../../components/TextInput/TextInput";
 import Navbar from "../../components/Navbar/Navbar";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import ActionButton from "../../components/ActionButton/ActionButton";
+import axios from "axios";
 
 function SignupPage() {
+	const [name, setName] = useState("");
 	const [email, changeEmail] = useState("");
 	const [emailError, setEmailError] = useState("");
 	const [emailChanged, setEmailChanged] = useState(false);
@@ -22,21 +25,24 @@ function SignupPage() {
 
 	const [showPassword, setShowPassword] = useState(false);
 
-	const [didLogin, setDidLogin] = useState(null);
 	const [errorText, setErrorText] = useState(
 		"Error Logging In! Try again...."
 	);
-	const [redirect, setRedirect] = useState(false);
-	const [ownerRedirect, setOwnerRedirect] = useState(false);
-	const [loginRedirect, setLoginRedirect] = useState(false);
 
 	const [notVerified, setNotVerified] = useState(false);
 	const [verifyMail, setVerifyMail] = useState("");
 
 	const [isLoading, setLoading] = useState(false);
+	const [success, setSuccess] = useState(false);
 
 	const mailErrorText = "Email cannot be empty";
 	const passwordErrorText = "Password cannot be empty";
+
+	const backend = process.env.REACT_APP_BACKEND_URL;
+
+	const handleNameChange = (event) => {
+		setName(event.target.value);
+	};
 
 	const handleEmailChange = (event) => {
 		setEmailChanged(true);
@@ -58,7 +64,34 @@ function SignupPage() {
 		}
 	};
 
-	const handleSubmit = () => {};
+	const handleSubmit = async () => {
+		setLoading(true);
+		const url = `${backend}/user/signup`;
+		console.log(url);
+
+		let data = {
+			name,
+			email,
+			password,
+		};
+
+		console.log(data);
+
+		try {
+			await axios.post(url, data).then((res) => {
+				setLoading(false);
+				setSuccess(true);
+				console.log(res);
+			});
+		} catch (error) {
+			setLoading(false);
+			console.log(error);
+		}
+	};
+
+	if (success) {
+		return <Redirect to="/login" />;
+	}
 
 	return (
 		<>
@@ -74,6 +107,8 @@ function SignupPage() {
 						type="text"
 						className="form-input"
 						variant="outlined"
+						value={name}
+						onChange={handleNameChange}
 					></TextInput>
 					<TextInput
 						id="email"
@@ -81,6 +116,8 @@ function SignupPage() {
 						type="email"
 						className="form-input"
 						variant="outlined"
+						value={email}
+						onChange={handleEmailChange}
 					></TextInput>
 					<br />
 					<TextInput
@@ -113,8 +150,22 @@ function SignupPage() {
 					></TextInput>
 				</form>
 				<div className="login-btn-div">
-					<ActionButton className="login-btn">REGISTER</ActionButton>
-					<Typography variant="h6" color="primary">
+					<ActionButton className="login-btn" onClick={handleSubmit}>
+						{!isLoading ? (
+							"REGISTER"
+						) : (
+							<CircularProgress
+								color="secondary"
+								size={20}
+								thickness={5}
+							/>
+						)}
+					</ActionButton>
+					<Typography
+						variant="h6"
+						color="primary"
+						className="btn-seperator"
+					>
 						--- OR ---
 					</Typography>
 					<Link to={`/login`}>
