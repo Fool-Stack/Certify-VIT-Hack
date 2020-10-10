@@ -14,7 +14,7 @@ Certify helps you generate certificates from a set of templates just by creating
 There are multiple events going on both online and offline in recent times, the hassle of generating certificates for all participants has always been there, so in order to solve the problem, we thought to create a mobile application as well as a website to overcome the problem
 
 ## What it does
-Certify basically takes in your data in a .csv format and converts it and adds it to the template.
+Certify basically takes in your data in a .csv format and converts it and adds it to the certificate template which you chose.
 
 ## How we built it
 We created Certify basically using ReactJs and NodeJs as they work fantastic in harmony with each other and for the mobile application we used Flutter because of its cross platform compatibility which makes the work a tiny bit easier.
