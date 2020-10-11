@@ -93,7 +93,11 @@ function MyEvents({ events, setRefresh }) {
 					<Grid container>
 						{events.map((event) => (
 							<Grid item sm={6} md={4}>
-								<EventItem info={event} admin={true} />
+								<EventItem
+									info={event}
+									admin={true}
+									id={event.event_id._id}
+								/>
 							</Grid>
 						))}
 					</Grid>

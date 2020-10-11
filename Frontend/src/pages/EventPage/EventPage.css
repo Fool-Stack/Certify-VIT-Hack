@@ -1,0 +1,82 @@
+.event-page-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.quiz-name-detail {
+	font-size: 3rem;
+	font-weight: 900;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: #5757ff;
+}
+
+.quiz-date-detail {
+	margin-top: 0;
+	font-weight: 700;
+}
+
+.certs-generated {
+	font-size: 3.5rem;
+	font-weight: 700;
+	color: #5757ff;
+	text-align: center;
+}
+
+.add-participants-modal {
+	padding: 5%;
+}
+
+.divider-1 {
+	width: 100% !important;
+	color: white !important;
+	background-color: white !important;
+	margin-top: 2% !important;
+	margin-bottom: 2% !important;
+}
+
+.template-zone {
+	padding: 3%;
+}
+
+.dropzone {
+	background-color: rgb(70, 70, 70);
+	padding: 3%;
+	padding-top: 5%;
+	text-align: center;
+	margin: 0 5%;
+	margin-bottom: 3%;
+	border-radius: 5px;
+}
+
+.drop-icon {
+	color: rgb(110, 110, 110) !important;
+	font-size: 7rem !important;
+}
+
+.add-participants-btn {
+	margin-top: 7%;
+	text-align: center;
+}
+
+.participants-list {
+	margin-top: 2%;
+	margin-bottom: 5%;
+}
+
+.participant-item {
+	/* background-color: black; */
+	border-bottom: 0.5px lightgray solid;
+}
+
+.MuiListItemText-primary {
+	font-weight: 900 !important;
+	font-family: "Inter", sans-serif !important;
+	font-size: 1.5rem !important;
+	color: #5757ff !important;
+}
+
+.MuiListItemText-secondary {
+	color: white !important;
+}

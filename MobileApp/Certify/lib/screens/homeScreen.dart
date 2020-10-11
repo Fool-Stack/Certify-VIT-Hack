@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:Certify/providers/globals.dart' as globals;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  String currentEvent = '';
   Widget _buildBottomSheet(
     BuildContext context,
     ScrollController scrollController,
@@ -75,6 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   child: TextFormField(
+                    onChanged: (value) {
+                      currentEvent = value;
+                    },
                     cursorColor: Theme.of(context).accentColor,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
@@ -159,6 +164,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: FlatButton(
                     onPressed: () {
+                      setState(() {
+                        globals.events.add(currentEvent);
+                      });
                       Navigator.push(
                         context,
                         BounceIn(
@@ -188,7 +196,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List events = [];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -237,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 width: double.infinity,
-                child: events.length == 0
+                child: globals.events.length == 0
                     ? Container(
                         height: size.height * 10 / 100,
                         alignment: Alignment.center,
@@ -250,7 +257,42 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       )
-                    : Container(),
+                    : Container(
+                        height: size.height * 60 / 100,
+                        width: double.maxFinite,
+                        child: ListView.builder(
+                          shrinkWrap: false,
+                          scrollDirection: Axis.vertical,
+                          itemCount: globals.events.length,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 6 / 100),
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: size.height * 6 / 100,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Theme.of(context).accentColor,
+                              ),
+                              margin:
+                                  EdgeInsets.only(bottom: size.width * 4 / 100),
+                              alignment: Alignment.centerLeft,
+                              padding: EdgeInsets.only(
+                                left: size.width * 5 / 100,
+                                right: size.width * 5 / 100,
+                              ),
+                              child: Text(
+                                globals.events[index],
+                                style: GoogleFonts.montserrat(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
               )
             ],
           ),

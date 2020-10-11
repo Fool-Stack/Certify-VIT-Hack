@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   http: ^0.12.2
+  flutter_launcher_icons: ^0.8.1
   bottom_sheet: ^0.0.1-dev.5
   font_awesome_flutter: ^8.8.1
   google_fonts: ^1.1.0
@@ -39,6 +40,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/launcher/ioslogo.png"
+  image_path_android: "assets/launcher/ioslogo.png"
+  adaptive_icon_background: "assets/launcher/androidbg.png"
+  adaptive_icon_foreground: "assets/launcher/androidfg.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

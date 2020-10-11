@@ -1,8 +1,12 @@
+import 'package:Certify/animations/bounceIn.dart';
+import 'package:Certify/screens/downloadScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ChooseTemplateScreen extends StatefulWidget {
   @override
+  final List contacts;
+  ChooseTemplateScreen({@required this.contacts});
   _ChooseTemplateScreenState createState() => _ChooseTemplateScreenState();
 }
 
@@ -49,7 +53,7 @@ class _ChooseTemplateScreenState extends State<ChooseTemplateScreen> {
               ),
               Container(
                 margin: EdgeInsets.symmetric(
-                  horizontal: size.width * 25 / 100,
+                  horizontal: size.width * 15 / 100,
                 ),
                 height: size.height * 8 / 100,
                 width: double.infinity,
@@ -63,13 +67,22 @@ class _ChooseTemplateScreenState extends State<ChooseTemplateScreen> {
                   size.height * 1 / 100,
                 ),
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      BounceIn(
+                        widget: DownloadScreen(
+                          contacts: widget.contacts,
+                        ),
+                      ),
+                    );
+                  },
                   splashColor: Theme.of(context).accentColor,
                   child: Center(
                     child: Text(
                       "Generate Certificates",
                       style: GoogleFonts.montserrat(
-                        fontSize: size.height * 1.8 / 100,
+                        fontSize: size.width * 4 / 100,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).backgroundColor,
                       ),
