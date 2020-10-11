@@ -50,10 +50,10 @@ $ .env config
 
 ``` bash
 Frontend:
-- cd into Frontend folder
-- run "npm install"
-- Make a .env file in the Frontend folder, add a field "REACT_APP_BACKEND_URL" with the backend url
-- run "npm start"
+$ cd into Frontend folder
+$ run "npm install"
+$ Make a .env file in the Frontend folder, add a field "REACT_APP_BACKEND_URL" with the backend url
+$ run "npm start"
 ```
 
 ## Useful Links
