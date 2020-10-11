@@ -4,7 +4,7 @@ Certify helps you generate certificates from a set of templates just by creating
 
 <p align="center">
 <a href="https://certify.jugaldb.com">
-<img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="400px" height="200px" alt="Lyricist Logo"/>
+<img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="800px" height="200px" alt="Lyricist Logo"/>
 </a>
 </p>
 
@@ -47,15 +47,13 @@ $ npm run dev/npm start
 -  [x] AWS Account
 -  [x] Internet :P 
 
-```
 
 ## License
 
-[Jugal Bhatt, Shivam Mehta, Sarthak Bharadwaj, Siddharth Singh and Vinayak Gupta](https://github.com/jugaldb/Certify-VIT-Hack/blob/master/LICENSE)**
+**MIT &copy; [Jugal Bhatt, Sarthak Bharadwaj, Siddharth Singh, Shivam Mehta & Vinayak Gupta](https://github.com/jugaldb/Certify-VIT-Hack/blob/master/LICENSE)**
 
+[![GitHub license](https://img.shields.io/github/license/jugaldb/Certify-VIT-Hack?style=social&logo=github)](https://github.com/jugaldb/Certify-VIT-Hack/blob/master/LICENSE)
 
-
----------
 
 ```javascript
 
@@ -64,5 +62,3 @@ if (youEnjoyed) {
 }
 
 ```
-
------------
