@@ -4,7 +4,7 @@ Certify helps you generate certificates from a set of templates just by creating
 
 <p align="center">
 <a href="https://certify.jugaldb.com">
-<img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="800px" height="200px" alt="Lyricist Logo"/>
+<img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="400px" height="100px" alt="Lyricist Logo"/>
 </a>
 </p>
 
