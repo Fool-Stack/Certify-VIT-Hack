@@ -16,7 +16,7 @@ var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 
 const viewCertificateDetailsFromQrCode = async (req, res, next) => {
-  const { auth_params } = req.body
+  const auth_params  = req.body.code
   const certificateDoc = await Certificate.findOne({ auth_params }).populate({
     path: "event_id",
     select: "name participants date",
