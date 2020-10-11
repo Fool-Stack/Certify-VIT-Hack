@@ -380,6 +380,22 @@ const changePassword = async (req, res, next) => {
   });
 }
 
+const getMe = async (req, res) => {
+  const userId = req.user.userId
+  const user = await User.findById(userID)
+  if(user){
+    res.status(200).json({
+      message:"Found",
+      user,
+    })
+  }
+  else{
+    res.status(400).json({
+      message:"Bad request"
+    })
+  }
+}
+
 module.exports = {
   userRegister,
   userLogin,
@@ -389,4 +405,5 @@ module.exports = {
   resetPassword,
   forgotPassword,
   changePassword,
+  getMe,
 }
