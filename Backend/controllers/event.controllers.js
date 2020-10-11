@@ -238,7 +238,11 @@ const uploadToS3 = async (res,body, filename,email,event_id,isLast, name, QRCode
                     from: process.env.sendgridEmail,
                     subject: "Certify: Certificate Generation",
                     text: " ",
-                    html: emailTemplates.VERIFY_EMAIL(result),//////change email
+                    html: `<!DOCTYPE html><html>
+                        <h4>Hey ${result.name},<h4> 
+                        <p>Your certificate for the event has been generated , to view the certificate please
+                        login in to certify.jugaldb.com with email: ${result.email} and password: ${result.email}</p>
+                    </html>`//////change email
                   };
                   sgMail
                     .send(msg)
