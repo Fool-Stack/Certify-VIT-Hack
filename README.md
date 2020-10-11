@@ -35,11 +35,30 @@ $ cd Certify-VIT-Hack
 $ npm i
 $ add the .env file in root of the project
 $ npm run dev/npm start
+$ .env config
+- dbURI
+- jwtSecret
+- SendgridAPIKey
+- sendgridEmail
+- AdminSignupCode
+- AWS_KEY_ID
+- AWS_SECRET_ACCESS
+- AWS_DEFAULT_REGION
+- AWS_S3_BUCKET
+```
+## Steps to run the Frontend
+
+``` bash
+Frontend:
+$ cd into Frontend folder
+$ run "npm install"
+$ Make a .env file in the Frontend folder, add a field "REACT_APP_BACKEND_URL" with the backend url
+$ run "npm start"
 ```
 
 ## Useful Links
 - [Certify Website](https://certify.jugaldb.com)
-- [Demo Video](https://vimeo.com/449633557)
+- [Demo Video](https://youtu.be/9ux7ETQvliQ)
 
 ## Requirements
 -  [x] NodeJs (or https://nodejs.org/en/)
