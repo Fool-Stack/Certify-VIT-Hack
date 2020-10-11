@@ -128,11 +128,16 @@ const getCertificates = async (req, res, next) => {
   let html = [];
   const event_id = req.body.event_id
   const users = await csv().fromFile(req.file.path);
+  for(let i=0;i<users.length; i++){
+    if(users[i].name == '' || users[i].email == '' || users[i].event == '' || users[i].score=='' || users[i].date== ''){
+      users.splice(i,1)
+    }
+  }
   fs.unlinkSync(req.file.path);
   // console.log(users)
   for(let i = 0; i < users.length; i++){
     const auth_params = shortid.generate()
-    const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + auth_params
+    const QRCodeLINK = 'https://certify.jugaldb.com/verify?id=' + auth_params
     users[i].link = QRCodeLINK
     const qr = await qrcode.toDataURL(QRCodeLINK)
     console.log(QRCodeLINK)
