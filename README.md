@@ -9,6 +9,13 @@ Certify helps you generate certificates from a set of templates just by creating
 </p>
 
 
+## Project Description
+Generating certificates can be long and tedious task, to send out even, more, while building out certify we kept this very thing in mind, whenever an admin adds people names to the certificate generator, our uniquely trained model takes the input via .csv file, checks if the user exists in the database, If yes, adds the certificate to their profile, if not it creates an account for him/her with the permission of the admin, stores the certificate and sends out a mail notifying the users whose certificates are generated.
+
+This ensures that all of your certificates are available in one place. And it makes it easier for both the person generating the certificates, and the person receiving the certificates.
+
+To achieve this, we use certificate templates, in which the information provided in the CSV file is placed into corresponding areas. All of the data is stored and accessed using AWS. The frontend communicates only with the backend, which in turn communicates with AWS and all the other services.
+
 
 ## Inspiration
 There are multiple events going on both online and offline in recent times, the hassle of generating certificates for all participants has always been there, so in order to solve the problem, we thought to create a mobile application as well as a website to overcome the problem
@@ -58,6 +65,7 @@ $ run "npm start"
 
 ## Useful Links
 - [Certify Website](https://certify.jugaldb.com)
+- [Certify App](https://bit.ly/33NEBlJ)
 - [Demo Video](https://youtu.be/9ux7ETQvliQ)
 
 ## Requirements
