@@ -382,7 +382,7 @@ const changePassword = async (req, res, next) => {
 
 const getMe = async (req, res) => {
   const userId = req.user.userId
-  const user = await User.findById(userID)
+  const user = await User.findById(userId)
   if(user){
     res.status(200).json({
       message:"Found",
