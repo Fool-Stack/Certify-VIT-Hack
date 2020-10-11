@@ -128,11 +128,16 @@ const getCertificates = async (req, res, next) => {
   let html = [];
   const event_id = req.body.event_id
   const users = await csv().fromFile(req.file.path);
+  for(let i=0;i<users.length; i++){
+    if(users[i].name == '' || users[i].email == '' || users[i].event == '' || users[i].score=='' || users[i].date== ''){
+      users.splice(i,1)
+    }
+  }
   fs.unlinkSync(req.file.path);
   // console.log(users)
   for(let i = 0; i < users.length; i++){
     const auth_params = shortid.generate()
-    const QRCodeLINK = 'https://certify.jugaldb.com/?id=' + auth_params
+    const QRCodeLINK = 'https://certify.jugaldb.com/verify?id=' + auth_params
     users[i].link = QRCodeLINK
     const qr = await qrcode.toDataURL(QRCodeLINK)
     console.log(QRCodeLINK)
@@ -177,7 +182,7 @@ const getCertificates = async (req, res, next) => {
       html.push(await htmlTemplates.TEMPLATE_2(users[i],data.Location,users[i].link))
     }
     const filename = 'gg' + Date.now()
-    await pdf.create(html[i], { height:"750px", width:"1240px", timeout: '100000' }).toStream(async function(err, stream) {
+    await pdf.create(html[i], { height:"608px", width:"1080px", timeout: '100000' }).toStream(async function(err, stream) {
       if (err) return console.log(err)
       if(i==users.length-1){
      await  uploadToS3(res,stream, filename,users[i].email,event_id,true, users[i].name, QRCodeLINK, auth_params)
