@@ -11,5 +11,6 @@ router.get('/events', checkAuth,   userControllers.seeAllEvents);
 router.patch('/forgotPassword', userControllers.forgotPassword);
 router.patch('/resetPassword', userControllers.resetPassword);
 router.patch('/changePassword', checkAuth, userControllers.changePassword)
+router.get('/me', checkAuth, userControllers.getMe);
 
 module.exports = router

@@ -1,0 +1,13 @@
+version: "2"
+services:
+  web:
+    restart: always
+    build: .
+    depends_on: :
+      - mongo
+    ports:
+      - "3000:3000"
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"

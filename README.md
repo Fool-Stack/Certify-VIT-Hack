@@ -4,10 +4,17 @@ Certify helps you generate certificates from a set of templates just by creating
 
 <p align="center">
 <a href="https://certify.jugaldb.com">
-<img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="400px" height="200px" alt="Lyricist Logo"/>
+<img src="https://certify-hax.s3.ap-south-1.amazonaws.com/certify.png" width="400px" height="100px" alt="Lyricist Logo"/>
 </a>
 </p>
 
+
+## Project Description
+Generating certificates can be long and tedious task, to send out even, more, while building out certify we kept this very thing in mind, whenever an admin adds people names to the certificate generator, our uniquely trained model takes the input via .csv file, checks if the user exists in the database, If yes, adds the certificate to their profile, if not it creates an account for him/her with the permission of the admin, stores the certificate and sends out a mail notifying the users whose certificates are generated.
+
+This ensures that all of your certificates are available in one place. And it makes it easier for both the person generating the certificates, and the person receiving the certificates.
+
+To achieve this, we use certificate templates, in which the information provided in the CSV file is placed into corresponding areas. All of the data is stored and accessed using AWS. The frontend communicates only with the backend, which in turn communicates with AWS and all the other services.
 
 
 ## Inspiration
@@ -35,11 +42,39 @@ $ cd Certify-VIT-Hack
 $ npm i
 $ add the .env file in root of the project
 $ npm run dev/npm start
+$ .env config
+- dbURI
+- jwtSecret
+- SendgridAPIKey
+- sendgridEmail
+- AdminSignupCode
+- AWS_KEY_ID
+- AWS_SECRET_ACCESS
+- AWS_DEFAULT_REGION
+- AWS_S3_BUCKET
+```
+## Steps to run the Frontend
+
+``` bash
+Frontend:
+$ cd into Frontend folder
+$ run "npm install"
+$ Make a .env file in the Frontend folder, add a field "REACT_APP_BACKEND_URL" with the backend url
+$ run "npm start"
+```
+
+## Steps to run app:
+
+```bash
+$ cd into MobileApp/Certify
+$ flutter pub get
+$ flutter run
 ```
 
 ## Useful Links
 - [Certify Website](https://certify.jugaldb.com)
-- [Demo Video](https://vimeo.com/449633557)
+- [Certify App](https://bit.ly/33NEBlJ)
+- [Demo Video](https://youtu.be/9ux7ETQvliQ)
 
 ## Requirements
 -  [x] NodeJs (or https://nodejs.org/en/)
@@ -47,15 +82,13 @@ $ npm run dev/npm start
 -  [x] AWS Account
 -  [x] Internet :P 
 
-```
 
 ## License
 
-[Jugal Bhatt, Shivam Mehta, Sarthak Bharadwaj, Siddharth Singh and Vinayak Gupta](https://github.com/jugaldb/Certify-VIT-Hack/blob/master/LICENSE)**
+**MIT &copy; [Jugal Bhatt, Sarthak Bharadwaj, Siddharth Singh, Shivam Mehta & Vinayak Gupta](https://github.com/jugaldb/Certify-VIT-Hack/blob/master/LICENSE)**
 
+[![GitHub license](https://img.shields.io/github/license/jugaldb/Certify-VIT-Hack?style=social&logo=github)](https://github.com/jugaldb/Certify-VIT-Hack/blob/master/LICENSE)
 
-
----------
 
 ```javascript
 
@@ -64,5 +97,3 @@ if (youEnjoyed) {
 }
 
 ```
-
------------
