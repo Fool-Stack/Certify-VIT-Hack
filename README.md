@@ -39,7 +39,7 @@ $ npm run dev/npm start
 
 ## Useful Links
 - [Certify Website](https://certify.jugaldb.com)
-- [Demo Video](https://vimeo.com/449633557)
+- [Demo Video](https://youtu.be/9ux7ETQvliQ)
 
 ## Requirements
 -  [x] NodeJs (or https://nodejs.org/en/)
