@@ -63,6 +63,14 @@ $ Make a .env file in the Frontend folder, add a field "REACT_APP_BACKEND_URL" w
 $ run "npm start"
 ```
 
+## Steps to run app:
+
+```bash
+$ cd into MobileApp/Certify
+$ flutter pub get
+$ flutter run
+```
+
 ## Useful Links
 - [Certify Website](https://certify.jugaldb.com)
 - [Certify App](https://bit.ly/33NEBlJ)
