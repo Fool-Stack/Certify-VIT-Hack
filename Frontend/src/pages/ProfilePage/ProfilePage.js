@@ -58,4 +58,4 @@ function ProfilePage() {
 	);
 }
 
-export default Profile;
+export default ProfilePage;
